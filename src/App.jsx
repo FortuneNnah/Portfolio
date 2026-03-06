@@ -1,9 +1,9 @@
 import './App.css'
-import HeroSection from './Components/HeroSection'
+import Main from './Components/Main'
 
 function App(){
   return(
-    <HeroSection />
+    <Main />
   )
 }
 
