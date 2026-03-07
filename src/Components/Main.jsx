@@ -31,7 +31,10 @@ const HeroSection = () => {
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <p className="avail">available</p>
+        <div className="avail">
+          <div className="circle"></div>
+          <p className="avail-txt">available</p>
+        </div>
         <h1>Hi, I'm Fortune.</h1>
         <p><b>A Frontend Web Developer</b></p>
       </div>
