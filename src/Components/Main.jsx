@@ -36,7 +36,9 @@ const HeroSection = () => {
           <p className="avail-txt">available</p>
         </div>
         <h1>Hi, I'm Fortune.</h1>
-        <p><b>A Frontend Web Developer</b></p>
+        <p>
+          <b>A Frontend Web Developer</b>
+        </p>
       </div>
     </section>
   );
