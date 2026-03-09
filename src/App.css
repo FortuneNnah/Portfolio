@@ -125,3 +125,23 @@ body{
   border-radius: 50px;
   background-color: green;
 }
+
+.about .about-content{
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  gap: 30px;
+}
+
+.about-content .img img{
+  width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 1px 3px 20px #fff;
+}
+
+.about-content .text{
+  max-width: 600px;
+  align-items: center;
+  justify-content: flex-end;
+}
