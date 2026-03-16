@@ -60,7 +60,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <div className="hero-image">
+              {/* <div className="hero-image">
                 <div className="image-container">
                   <img
                     src="src/Imgs/Meeeeeeeeee.jpeg"
@@ -68,7 +68,7 @@ const About = () => {
                   />
                   <div className="image-overlay"></div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -136,10 +136,10 @@ const About = () => {
                     <h3>Web Development Intern</h3>
                     <span className="timeline-date">2023 - 2024</span>
                   </div>
-                  <h4>Tech Startup</h4>
+                  <h4>SolveStation Labs</h4>
                   <ul>
                     <li>
-                      Assisted in building user interfaces for web applications
+                      Got introduced to Javascript library - React. Learnt to create user interfaces/Components for web applications
                     </li>
                     <li>
                       Learned industry best practices for frontend development
