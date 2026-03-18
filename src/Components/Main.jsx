@@ -38,7 +38,7 @@ const HeroSection = () => {
         </div>
         <h1>Hi, I'm Fortune Nnah.</h1>
         <p>
-          <b>A Frontend Web Developer</b>
+          <b>A Frontend Web Developer {"-->"}</b>
         </p>
       </div>
     </section>
