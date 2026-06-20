@@ -164,19 +164,19 @@ const Contact = () => {
                     <ContactInfoItem
                       icon={<IconMail />}
                       label="Email"
-                      value="fortune.nnah@email.com"
-                      href="mailto:fortune.nnah@email.com"
+                      value="fortunennah7474@email.com"
+                      href="mailto:fortunennah747@email.com"
                     />
                     <ContactInfoItem
                       icon={<IconPhone />}
                       label="Phone"
-                      value="+234 800 000 0000"
-                      href="tel:+2348000000000"
+                      value="+234 7086362364"
+                      href="tel:+2347086362364"
                     />
                     <ContactInfoItem
                       icon={<IconMapPin />}
                       label="Location"
-                      value="Port Harcourt, Nigeria"
+                      value="Lagos, Nigeria"
                     />
                   </div>
 
@@ -185,13 +185,13 @@ const Contact = () => {
                   <div className="contact-socials">
                     <p className="contact-socials-label">Find me online</p>
                     <div className="contact-socials-row">
-                      <a href="https://github.com" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="GitHub">
+                      <a href="https://github.com/FortuneNnah" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="GitHub">
                         <IconGithub />
                       </a>
                       <a href="https://linkedin.com" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                         <IconLinkedin />
                       </a>
-                      <a href="https://twitter.com" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="Twitter / X">
+                      <a href="https://twitter.com/@_jhsFortune" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="Twitter / X">
                         <IconTwitter />
                       </a>
                     </div>
