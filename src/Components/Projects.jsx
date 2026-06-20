@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Header } from "./Hero";
+import { useEffect } from "react";
+import { observeElements } from "../utils/scrollReveal";
 
 /* ── SVG Icon Components ─────────────────────────────────── */
 const IconExternalLink = () => (
@@ -32,37 +35,37 @@ const IconFilter = () => (
 const projects = [
   {
     id: 1,
-    title: "DevPortfolio",
+    title: "ClipFind",
     description:
-      "A fully responsive personal portfolio site built with React and Vite. Features smooth page transitions, dark theme, and dynamic project filtering.",
+      "ClipFind is an AI-powered movie search platform inspired by the concept of Shazam for movies. Users can upload video clips and the system analyzes frames to identify the movie title, cast, release year, and streaming availability.",
     tags: ["React", "CSS3", "Vite"],
     category: "Frontend",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://clipfind.netlify.app",
+    repoUrl: "https://github.com/FortuneNnah/ClipFInd",
     featured: true,
     year: "2024",
   },
   {
     id: 2,
-    title: "TaskFlow",
+    title: "Novra",
     description:
-      "A Kanban-style task management app with drag-and-drop support, local persistence, and a clean UI built entirely in vanilla JavaScript.",
+      "A modern, and clean landing page for a furniture company. Built with React and styled-components, this project showcases a responsive design, smooth animations, and a user-friendly interface that highlights the brand's products and services.",
     tags: ["JavaScript", "HTML5", "CSS3"],
     category: "App",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://novra.pxxl.click",
+    repoUrl: "https://github.com/FortuneNnah/Novra",
     featured: true,
     year: "2024",
   },
   {
     id: 3,
-    title: "ShopLite",
+    title: "EmpireBakes",
     description:
-      "A minimal e-commerce storefront UI with product filtering, cart state management, and a responsive grid layout powered by React context.",
+      "Empire-Bakes is a sleek and responsive web project i designed to showcase delicious meals and promote a modern dining experience. Built with HTML, CSS, and JavaScript, this website features beautifully styled sections, an elegant product display, and smooth interactions that reflect the brand’s passion for taste and quality.",
     tags: ["React", "Context API", "CSS3"],
     category: "Frontend",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://empirebakes.pxxl.click",
+    repoUrl: "https://github.com/FortuneNnah/Empire-Bakes",
     featured: true,
     year: "2023",
   },
@@ -106,25 +109,9 @@ const projects = [
 
 const FILTERS = ["All", "Frontend", "App", "Library"];
 
-/* ── Header (shared) ─────────────────────────────────────── */
-const Header = () => (
-  <header className="header">
-    <nav className="navbar">
-      <div className="logo">&lt;/&gt;</div>
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-);
-
 /* ── Project Card ────────────────────────────────────────── */
 const ProjectCard = ({ project }) => (
-  <div className="project-card">
+  <div className="project-card" data-scroll-reveal>
     <div className="project-card-header">
       <div className="project-folder-icon">
         <IconFolder />
@@ -176,7 +163,7 @@ const ProjectCard = ({ project }) => (
 
 /* ── Featured Project Row ────────────────────────────────── */
 const FeaturedProject = ({ project, reverse }) => (
-  <div className={`featured-project ${reverse ? "featured-project--reverse" : ""}`}>
+  <div className={`featured-project ${reverse ? "featured-project--reverse" : ""}`} data-scroll-reveal>
     <div className="featured-mockup">
       <div className="featured-mockup-bar">
         <span className="mockup-dot" />
@@ -233,6 +220,10 @@ const FeaturedProject = ({ project, reverse }) => (
 /* ── Projects Page ───────────────────────────────────────── */
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
+
+  useEffect(() => {
+    observeElements();
+  }, [activeFilter]);
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
@@ -316,7 +307,7 @@ const Projects = () => {
             <div className="cta-buttons">
               <a href="#contact" className="cta-button primary">Get In Touch</a>
               <a
-                href="https://github.com"
+                href="https://github.com/FortuneNnah"
                 className="cta-button secondary"
                 target="_blank"
                 rel="noopener noreferrer"

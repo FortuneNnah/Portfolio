@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Header } from "./Hero";
+import { useEffect } from "react";
+import { observeElements } from "../utils/scrollReveal";
 
 /* ── SVG Icon Components ─────────────────────────────────── */
 const IconMail = () => (
@@ -56,22 +59,6 @@ const IconCheckCircle = () => (
   </svg>
 );
 
-/* ── Header ──────────────────────────────────────────────── */
-const Header = () => (
-  <header className="header">
-    <nav className="navbar">
-      <div className="logo">&lt;/&gt;</div>
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-);
-
 /* ── Contact Info Item ───────────────────────────────────── */
 const ContactInfoItem = ({ icon, label, value, href }) => (
   <a
@@ -99,6 +86,10 @@ const Contact = () => {
   const [errors, setErrors]     = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]   = useState(false);
+
+  useEffect(() => {
+    observeElements();
+  }, []);
 
   const validate = () => {
     const e = {};
@@ -161,7 +152,7 @@ const Contact = () => {
             <div className="contact-grid">
 
               {/* ── Left: info + socials ── */}
-              <div className="contact-left">
+              <div className="contact-left" data-scroll-reveal>
                 <div className="contact-info-card">
                   <h2 className="contact-info-heading">Contact Information</h2>
                   <p className="contact-info-intro">
@@ -214,7 +205,7 @@ const Contact = () => {
               </div>
 
               {/* ── Right: form ── */}
-              <div className="contact-right">
+              <div className="contact-right" data-scroll-reveal>
                 {submitted ? (
                   <div className="contact-success">
                     <IconCheckCircle />

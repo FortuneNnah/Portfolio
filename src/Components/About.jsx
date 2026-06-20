@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Header } from "./Hero";
+import { useEffect } from "react";
+import { observeElements } from "../utils/scrollReveal";
 
 /* ── Inline SVG Icon Components ─────────────────────────── */
 const IconGradCap = () => (
@@ -52,32 +55,16 @@ const IconTrendingUp = () => (
   </svg>
 );
 
-/* ── Header ──────────────────────────────────────────────── */
-export const Header = () => {
-  return (
-    <header className="header">
-      <nav className="navbar">
-        <div className="logo">&lt;/&gt;</div>
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/projects">Projects</Link></li>
-          <li><Link to="/skills">Skills</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-        </ul>
-      </nav>
-    </header>
-  );
-};
 
-/* ── About Page ──────────────────────────────────────────── */
 const About = () => {
+  useEffect(() => {
+    observeElements();
+  }, []);
+
   return (
     <>
       <Header />
       <div className="about-page">
-
-        {/* Professional Hero Section */}
         <section className="about-hero">
           <div className="hero-container">
             <div className="hero-contents">
@@ -135,7 +122,7 @@ const About = () => {
           <div className="container">
             <h2>Professional Experience</h2>
             <div className="timeline">
-              <div className="timeline-item">
+              <div className="timeline-item" data-scroll-reveal>
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
                   <div className="timeline-header">
@@ -177,7 +164,7 @@ const About = () => {
           <div className="container">
             <h2>Technical Expertise</h2>
             <div className="skills-grid">
-              <div className="skill-category">
+              <div className="skill-category" data-scroll-reveal>
                 <h3>Core Technologies</h3>
                 <div className="skill-list">
                   <div className="skill-item">
@@ -233,7 +220,7 @@ const About = () => {
           <div className="container">
             <h2>Education & Certifications</h2>
             <div className="education-grid">
-              <div className="education-item">
+              <div className="education-item" data-scroll-reveal>
                 <div className="education-icon"><IconGradCap /></div>
                 <div className="education-content">
                   <h3>Bachelor of Science in Computer Science</h3>
@@ -281,7 +268,7 @@ const About = () => {
           <div className="container">
             <h2>Professional Values</h2>
             <div className="values-grid">
-              <div className="value-item">
+              <div className="value-item" data-scroll-reveal>
                 <div className="value-icon"><IconLightbulb /></div>
                 <h3>Innovation</h3>
                 <p>Constantly exploring cutting-edge technologies and creative solutions to complex problems.</p>

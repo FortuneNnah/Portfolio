@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Roboto slab;
   background-color: #0c0c0c;
   color: #e0e0e0;
 }
@@ -45,10 +45,28 @@ body {
   color: var(--accent);
   cursor: pointer;
   transition: color 0.3s ease;
+  text-decoration: none;
 }
 
 .navbar .logo:hover {
   color: var(--accent-hover);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--link-text);
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  z-index: 101;
+}
+
+.mobile-menu-btn:hover {
+  color: var(--accent);
 }
 
 .nav-links {
@@ -65,7 +83,8 @@ body {
   position: relative;
 }
 
-.nav-links li a:hover {
+.nav-links li a:hover,
+.nav-links li a.nav-link--active {
   color: var(--accent);
 }
 
@@ -80,8 +99,58 @@ body {
   transition: width 0.3s ease;
 }
 
-.nav-links li a:hover::after {
+.nav-links li a:hover::after,
+.nav-links li a.nav-link--active::after {
   width: 100%;
+}
+
+/* ─── Scroll Reveal Animations ───────────────────────────── */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+[data-scroll-reveal].reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Back to Top Button ─────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  z-index: 50;
+  box-shadow: 0 8px 25px rgba(142,68,173,0.3);
+}
+
+.back-to-top.show {
+  display: flex;
+  opacity: 1;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(142,68,173,0.4);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px);
 }
 
 /* ─── Home Hero Section ──────────────────────────────────── */
@@ -120,7 +189,14 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: green;
+  background-color: yellowgreen;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
 }
 
 /* ─── About (Home Page) ──────────────────────────────────── */
@@ -1471,6 +1547,48 @@ body {
   max-width: 420px;
 }
 
+/* ─── Mobile Menu Styles ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: #121212;
+    border-bottom: 1px solid rgba(142,68,173,0.2);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    list-style: none;
+  }
+
+  .nav-links--open {
+    max-height: 300px;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(142,68,173,0.1);
+  }
+
+  .nav-links li a::after {
+    display: none;
+  }
+
+  .nav-links li a.nav-link--active {
+    background: rgba(142,68,173,0.1);
+    border-left: 3px solid var(--accent);
+    padding-left: calc(1.5rem - 3px);
+  }
+}
+
 /* ================================================================
    RESPONSIVE — single consolidated block, no duplicates
    900px  → tablet landscape
@@ -1635,5 +1753,14 @@ body {
 
   .section-heading {
     font-size: 2rem;
+  }
+
+  /* Back to Top */
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
   }
 }
