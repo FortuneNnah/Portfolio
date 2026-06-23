@@ -144,7 +144,7 @@ const About = () => {
                 <div className="timeline-content">
                   <div className="timeline-header">
                     <h3>Web Development Intern</h3>
-                    <span className="timeline-date">2023 – 2024</span>
+                    <span className="timeline-date">2025</span>
                   </div>
                   <h4>SolveStation Labs</h4>
                   <ul>
