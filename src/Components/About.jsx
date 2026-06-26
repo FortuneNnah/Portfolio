@@ -302,7 +302,7 @@ const About = () => {
             </p>
             <div className="cta-buttons">
               <Link to="/" className="cta-button primary">View My Work</Link>
-              <a href="#contact" className="cta-button secondary">Get In Touch</a>
+              <a href="contact" className="cta-button secondary">Get In Touch</a>
             </div>
           </div>
         </section>

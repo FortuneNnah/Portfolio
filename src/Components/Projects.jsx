@@ -71,40 +71,40 @@ const projects = [
   },
   {
     id: 4,
-    title: "WeatherNow",
+    title: "Chapel of Praise",
     description:
       "Real-time weather dashboard consuming the OpenWeather API. Displays current conditions, a 5-day forecast, and animated weather icons.",
-    tags: ["JavaScript", "REST API", "CSS3"],
+    tags: ["React", "CSS3", "vite"],
     category: "App",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://chapelofpraise.netlify.app",
+    repoUrl: "https://github.com/FortuneNnah/ChapelofPraise",
     featured: false,
     year: "2023",
   },
   {
     id: 5,
-    title: "BlogPress",
+    title: "AIM",
     description:
-      "A lightweight blog UI template with markdown rendering, tag-based filtering, and estimated read-time calculation.",
-    tags: ["React", "Markdown", "Vite"],
+    "A photography portfolio website built with React and Vanilla CSS. It features a clean, minimalist design, smooth transitions, and a responsive layout that showcases the photographer's work effectively.",
+    tags: ["React", "CSS3", "Vite"],
     category: "Frontend",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://aim-portfolio.netlify.app",
+    repoUrl: "https://github.com/FortuneNnah/AIM",
     featured: false,
     year: "2023",
   },
-  {
-    id: 6,
-    title: "UIKit",
-    description:
-      "A reusable React component library including buttons, modals, form inputs, and data tables — fully documented and themeable via CSS variables.",
-    tags: ["React", "Storybook", "CSS3"],
-    category: "Library",
-    liveUrl: "#",
-    repoUrl: "#",
-    featured: false,
-    year: "2024",
-  },
+  // {
+  //   id: 6,
+  //   title: "UIKit",
+  //   description:
+  //     "A reusable React component library including buttons, modals, form inputs, and data tables — fully documented and themeable via CSS variables.",
+  //   tags: ["React", "Storybook", "CSS3"],
+  //   category: "Library",
+  //   liveUrl: "#",
+  //   repoUrl: "#",
+  //   featured: false,
+  //   year: "2024",
+  // },
 ];
 
 const FILTERS = ["All", "Frontend", "App", "Library"];
@@ -164,7 +164,7 @@ const ProjectCard = ({ project }) => (
 /* ── Featured Project Row ────────────────────────────────── */
 const FeaturedProject = ({ project, reverse }) => (
   <div className={`featured-project ${reverse ? "featured-project--reverse" : ""}`} data-scroll-reveal>
-    <div className="featured-mockup">
+    {/* <div className="featured-mockup">
       <div className="featured-mockup-bar">
         <span className="mockup-dot" />
         <span className="mockup-dot" />
@@ -180,7 +180,7 @@ const FeaturedProject = ({ project, reverse }) => (
         </div>
         <div className="mockup-line mockup-line--short" />
       </div>
-    </div>
+    </div> */}
 
     <div className="featured-info">
       <span className="featured-label">Featured Project</span>
@@ -305,7 +305,7 @@ const Projects = () => {
               Let's build something great together.
             </p>
             <div className="cta-buttons">
-              <a href="#contact" className="cta-button primary">Get In Touch</a>
+              <a href="/contact" className="cta-button primary">Get In Touch</a>
               <a
                 href="https://github.com/FortuneNnah"
                 className="cta-button secondary"
