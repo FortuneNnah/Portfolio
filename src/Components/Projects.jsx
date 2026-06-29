@@ -50,7 +50,7 @@ const projects = [
     title: "Novra",
     description:
       "A modern, and clean landing page for a furniture company. Built with React and styled-components, this project showcases a responsive design, smooth animations, and a user-friendly interface that highlights the brand's products and services.",
-    tags: ["JavaScript", "HTML5", "CSS3"],
+    tags: ["React", "vite", "CSS3"],
     category: "App",
     liveUrl: "https://novra.pxxl.click",
     repoUrl: "https://github.com/FortuneNnah/Novra",
@@ -62,7 +62,7 @@ const projects = [
     title: "EmpireBakes",
     description:
       "Empire-Bakes is a sleek and responsive web project i designed to showcase delicious meals and promote a modern dining experience. Built with HTML, CSS, and JavaScript, this website features beautifully styled sections, an elegant product display, and smooth interactions that reflect the brand’s passion for taste and quality.",
-    tags: ["React", "Context API", "CSS3"],
+    tags: ["HTML5", "CSS3", "JavaScript"],
     category: "Frontend",
     liveUrl: "https://empirebakes.pxxl.click",
     repoUrl: "https://github.com/FortuneNnah/Empire-Bakes",
