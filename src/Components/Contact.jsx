@@ -174,8 +174,7 @@ catch (err) {
             <p className="contact-hero-eyebrow">Get In Touch</p>
             <h1 className="contact-hero-heading">Let's Work Together</h1>
             <p className="contact-hero-sub">
-              Have a project in mind, a question, or just want to say hello?
-              My inbox is always open. I'll get back to you within 24 hours.
+              Have a project in mind, a question? My inbox is always open. I'll get back to you within 24 hours.
             </p>
           </div>
         </section>
@@ -221,9 +220,6 @@ catch (err) {
                     <div className="contact-socials-row">
                       <a href="https://github.com/FortuneNnah" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="GitHub">
                         <IconGithub />
-                      </a>
-                      <a href="https://linkedin.com" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                        <IconLinkedin />
                       </a>
                       <a href="https://twitter.com/@_jhsFortune" className="contact-social-link" target="_blank" rel="noopener noreferrer" title="Twitter / X">
                         <IconTwitter />
