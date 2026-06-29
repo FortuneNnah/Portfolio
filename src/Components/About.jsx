@@ -6,14 +6,14 @@ import { observeElements } from "../utils/scrollReveal";
 
 /* ── Inline SVG Icon Components ─────────────────────────── */
 const IconGradCap = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
     <path d="M6 12v5c3.33 1.67 8.67 1.67 12 0v-5"/>
   </svg>
 );
 
 const IconCertificate = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="14" rx="2"/>
     <path d="M8 21h8M12 17v4"/>
     <path d="M8 8h8M8 11h5"/>
@@ -21,20 +21,20 @@ const IconCertificate = () => (
 );
 
 const IconAward = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="8" r="6"/>
     <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
   </svg>
 );
 
 const IconLightbulb = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.6-1.4 4.9-3.5 6.2-.5.3-.5.8-.5 1.3v.5H9v-.5c0-.5 0-1-.5-1.3A7 7 0 0 1 12 2z"/>
   </svg>
 );
 
 const IconTarget = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/>
     <circle cx="12" cy="12" r="6"/>
     <circle cx="12" cy="12" r="2"/>
@@ -42,14 +42,14 @@ const IconTarget = () => (
 );
 
 const IconHandshake = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M2 12.5l3-3 4 4 4-4 4 4 3-3"/>
     <path d="M5 9.5V17a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/>
   </svg>
 );
 
 const IconTrendingUp = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
     <polyline points="17 6 23 6 23 12"/>
   </svg>
@@ -191,12 +191,12 @@ const About = () => {
               <div className="skill-category">
                 <h3>Tools & Frameworks</h3>
                 <div className="skill-list">
-                  <div className="skill-item">
+                  {/* <div className="skill-item">
                     <span className="skill-name">Node.js</span>
                     <div className="skill-bar">
                       <div className="skill-fill" style={{ width: "75%" }}></div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="skill-item">
                     <span className="skill-name">Git & GitHub</span>
                     <div className="skill-bar">
@@ -223,10 +223,10 @@ const About = () => {
               <div className="education-item" data-scroll-reveal>
                 <div className="education-icon"><IconGradCap /></div>
                 <div className="education-content">
-                  <h3>Bachelor of Science in Computer Science</h3>
-                  <h4>University Name</h4>
-                  <span className="education-date">2020 – 2024</span>
-                  <p>Focused on software engineering principles, algorithms, and web technologies.</p>
+                  <h3>Bachelor of Engineering in Chemical Engineering</h3>
+                  <h4>Current</h4>
+                  <span className="education-date">2022 – 2027</span>
+                  <p>Focused on chemical engineering principles, processes, and technologies. </p>
                 </div>
               </div>
 
@@ -234,13 +234,13 @@ const About = () => {
                 <div className="education-icon"><IconCertificate /></div>
                 <div className="education-content">
                   <h3>React Developer Certification</h3>
-                  <h4>Meta (Facebook)</h4>
-                  <span className="education-date">2024</span>
+                  <h4>SolveStation lab</h4>
+                  <span className="education-date">2025</span>
                   <p>Comprehensive training in React development, state management, and best practices.</p>
                 </div>
               </div>
 
-              <div className="education-item">
+              {/* <div className="education-item">
                 <div className="education-icon"><IconAward /></div>
                 <div className="education-content">
                   <h3>Frontend Development Bootcamp</h3>
@@ -258,7 +258,7 @@ const About = () => {
                   <span className="education-date">2023</span>
                   <p>Intensive program covering modern web development technologies and methodologies.</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
