@@ -174,7 +174,7 @@ catch (err) {
             <p className="contact-hero-eyebrow">Get In Touch</p>
             <h1 className="contact-hero-heading">Let's Work Together</h1>
             <p className="contact-hero-sub">
-              Have a project in mind, a question? My inbox is always open. I'll get back to you within 24 hours.
+              Have a project in mind or a question? My inbox is always open. I'll get back to you within 24 hours.
             </p>
           </div>
         </section>

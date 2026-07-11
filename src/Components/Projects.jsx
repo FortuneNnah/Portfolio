@@ -38,9 +38,9 @@ const projects = [
     title: "ClipFind",
     description:
       "ClipFind is an AI-powered movie search platform inspired by the concept of Shazam for movies. Users can upload video clips and the system analyzes frames to identify the movie title, cast, release year, and streaming availability.",
-    tags: ["React", "CSS3", "Vite"],
+    tags: ["React", "CSS3", "Vite","(still in progress)"],
     category: "Frontend",
-    liveUrl: "https://clipfind.netlify.app",
+    liveUrl: "",
     repoUrl: "https://github.com/FortuneNnah/ClipFInd",
     featured: true,
     year: "2024",
@@ -73,8 +73,8 @@ const projects = [
     id: 4,
     title: "Chapel of Praise",
     description:
-      "Real-time weather dashboard consuming the OpenWeather API. Displays current conditions, a 5-day forecast, and animated weather icons.",
-    tags: ["React", "CSS3", "vite"],
+      "Chapel is a landing website for a community or church-focused web experience. The project brings together a welcoming hero page, community details, event information, sermon highlights, media gallery content, and a contact section.",
+    tags: ["React", "CSS3", "vite",],
     category: "App",
     liveUrl: "https://chapelofpraise.netlify.app",
     repoUrl: "https://github.com/FortuneNnah/ChapelofPraise",
