@@ -80,7 +80,7 @@ export const Header = () => {
 
 const HeroSection = () => {
   return (
-    <section className="hero-section">
+    <section className="home-hero">
       <div className="hero-content">
         <div className="avail">
           <div className="circle"></div>
@@ -97,6 +97,20 @@ const HeroSection = () => {
           <Link to="/contact" className="cta-button secondary">
             Get In Touch
           </Link>
+        </div>
+        <div className="hero-metrics">
+          <div className="hero-metric">
+            <strong>15+</strong>
+            <span>Projects delivered</span>
+          </div>
+          <div className="hero-metric">
+            <strong>2+</strong>
+            <span>Years of experience</span>
+          </div>
+          <div className="hero-metric">
+            <strong>100%</strong>
+            <span>Client satisfaction</span>
+          </div>
         </div>
       </div>
     </section>

@@ -268,31 +268,39 @@ const Projects = () => {
 
         {/* ── Other Projects ── */}
         <section className="other-projects-section">
-          <div className="projects-container">
-            <div className="other-projects-header">
-              <h2 className="section-heading">Other Projects</h2>
-              <div className="filter-bar">
-                <IconFilter />
-                {FILTERS.map((f) => (
-                  <button
-                    key={f}
-                    className={`filter-btn ${activeFilter === f ? "filter-btn--active" : ""}`}
-                    onClick={() => setActiveFilter(f)}
-                  >
-                    {f}
-                  </button>
-                ))}
+          <div className="projects-container projects-view-layout">
+            <aside className="projects-sidebar">
+              <div className="sidebar-card">
+                <p className="section-label">Project Library</p>
+                <h3>Find projects by category</h3>
+                <p>
+                  Use the sidebar controls to locate work that matches your needs. Each project is presented with a concise summary, tech stack, and source reference.
+                </p>
+                <div className="filter-bar sidebar-filter">
+                  <IconFilter />
+                  {FILTERS.map((f) => (
+                    <button
+                      key={f}
+                      className={`filter-btn ${activeFilter === f ? "filter-btn--active" : ""}`}
+                      onClick={() => setActiveFilter(f)}
+                    >
+                      {f}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            </aside>
 
-            <div className="projects-grid">
-              {filteredOthers.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-              {filteredOthers.length === 0 && (
-                <p className="no-projects">No projects in this category yet.</p>
-              )}
-            </div>
+            <main className="projects-main">
+              <div className="projects-grid">
+                {filteredOthers.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+                {filteredOthers.length === 0 && (
+                  <p className="no-projects">No projects in this category yet.</p>
+                )}
+              </div>
+            </main>
           </div>
         </section>
 

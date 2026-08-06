@@ -67,52 +67,86 @@ const About = () => {
       <div className="about-page">
         <section className="about-hero">
           <div className="hero-container">
-            <div className="hero-contents">
-              <div className="hero-text">
+            <div className="about-hero-grid">
+              <div className="about-hero-panel" data-scroll-reveal>
+                <p className="section-label">About Me</p>
                 <h1>Fortune Nnah</h1>
                 <h2>Frontend Web Developer</h2>
-                <p className="hero-description">
-                  Crafting exceptional digital experiences through innovative
-                  frontend development, with a focus on performance,
-                  accessibility, and user-centered design.
+                <p className="hero-summary">
+                  I design, build, and refine modern web interfaces with a focus on performance, accessibility, and elegant user experiences.
                 </p>
-                <div className="hero-stats">
-                  <div className="stat">
-                    <span className="stat-number">2+</span>
-                    <span className="stat-label">Years Experience</span>
+                <div className="about-metrics">
+                  <div className="metric-card">
+                    <span>15+</span>
+                    <p>Projects delivered</p>
                   </div>
-                  <div className="stat">
-                    <span className="stat-number">15+</span>
-                    <span className="stat-label">Projects Completed</span>
+                  <div className="metric-card">
+                    <span>2+</span>
+                    <p>Years of experience</p>
                   </div>
-                  <div className="stat">
-                    <span className="stat-number">100%</span>
-                    <span className="stat-label">Client Satisfaction</span>
+                  <div className="metric-card">
+                    <span>100%</span>
+                    <p>Client satisfaction</p>
                   </div>
+                </div>
+                <div className="hero-actions">
+                  <Link to="/projects" className="cta-button primary">View Projects</Link>
+                  <Link to="/contact" className="cta-button secondary">Contact Me</Link>
+                </div>
+              </div>
+
+              <div className="about-hero-details" data-scroll-reveal>
+                <div className="detail-card">
+                  <h3>What I build</h3>
+                  <p>
+                    Clean user interfaces, responsive layouts, and reliable frontend systems
+                    that help brands communicate with clarity and confidence.
+                  </p>
+                </div>
+                <div className="detail-card">
+                  <h3>How I work</h3>
+                  <ul>
+                    <li>Fast iteration with component-driven development</li>
+                    <li>Thoughtful interaction design with mobile-first responsiveness</li>
+                    <li>Focus on maintainable, scalable code</li>
+                  </ul>
+                </div>
+                <div className="detail-card">
+                  <h3>Impact focus</h3>
+                  <ul>
+                    <li>Improve performance and reduce load times</li>
+                    <li>Keep interfaces accessible and easy to use</li>
+                    <li>Deliver solutions that feel polished and confident</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Professional Summary */}
-        <section className="professional-summary">
+        <section className="about-overview">
           <div className="container">
-            <h2>About Me</h2>
-            <div className="summary-content">
-              <p>
-                As a dedicated Frontend Web Developer, I specialize in creating
-                robust, scalable, and visually compelling web applications. My
-                expertise spans modern JavaScript frameworks, responsive design
-                principles, and performance optimization techniques.
-              </p>
-              <p>
-                I am committed to delivering high-quality solutions that not
-                only meet technical requirements but also provide exceptional
-                user experiences. My approach combines technical proficiency
-                with creative problem-solving to transform complex challenges
-                into elegant, functional solutions.
-              </p>
+            <h2>Career Highlights</h2>
+            <div className="overview-grid">
+              <article className="overview-card" data-scroll-reveal>
+                <h3>Specialized Frontend Craft</h3>
+                <p>
+                  Modern, component-based development using React, Vite, and modern CSS
+                  for interfaces that stay reliable across devices.
+                </p>
+              </article>
+              <article className="overview-card" data-scroll-reveal>
+                <h3>Design-led engineering</h3>
+                <p>
+                  I build interfaces that are usable, stable, and polished with attention to visual hierarchy.
+                </p>
+              </article>
+              <article className="overview-card" data-scroll-reveal>
+                <h3>Performance-driven</h3>
+                <p>
+                  Focused on reducing load times and preserving responsiveness for real-world users.
+                </p>
+              </article>
             </div>
           </div>
         </section>
