@@ -1908,9 +1908,31 @@ body {
     font-size: 1.3rem;
   }
 
+  .home-hero {
+    min-height: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .hero-cta {
+    justify-content: flex-start;
+  }
+
   .hero-metrics,
   .profile-keypoints {
     gap: 1rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
   }
 
   .about-metrics {
@@ -2017,6 +2039,14 @@ body {
 
   .hero-actions {
     gap: 0.75rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-metric {
+    padding: 1rem;
   }
 
   .metric-card {
