@@ -103,7 +103,7 @@ const HeroSection = () => {
           </div>
           <div className="hero-metrics">
             <div className="hero-metric">
-              <strong>15+</strong>
+              <strong>10+</strong>
               <span>Projects delivered</span>
             </div>
             <div className="hero-metric">

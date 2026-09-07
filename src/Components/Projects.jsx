@@ -52,7 +52,7 @@ const projects = [
       "A modern, and clean landing page for a furniture company. Built with React and styled-components, this project showcases a responsive design, smooth animations, and a user-friendly interface that highlights the brand's products and services.",
     tags: ["React", "vite", "CSS3"],
     category: "App",
-    liveUrl: "https://novra.pxxl.click",
+    liveUrl: "https://thenovra.pxxl.click",
     repoUrl: "https://github.com/FortuneNnah/Novra",
     featured: true,
     year: "2024",
