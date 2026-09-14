@@ -269,10 +269,10 @@ function App() {
         <section id="home" className="hero-section">
           <div className="container hero-layout">
             <div className="hero-copy" data-scroll-reveal>
-              <p className="eyebrow">Frontend Developer / Full-Stack Developer</p>
-              <h1>Building modern digital products with clarity, precision, and purpose.</h1>
+              <p className="eyebrow">Frontend Developer / React Native Developer</p>
+              <h1>Designing digital products that feel clear, useful, and genuinely considered.</h1>
               <p className="lead">
-                I’m Fortune Nnah, a developer focused on crafting reliable, user-centered web experiences that solve real problems and help brands grow with confidence.
+                I’m Fortune Nnah, a frontend and mobile developer building thoughtful interfaces for products that need to work beautifully and perform reliably.
               </p>
               <div className="cta-row">
                 <a href="#projects" className="btn btn-primary">
@@ -316,31 +316,31 @@ function App() {
           <div className="container">
             <div className="section-heading" data-scroll-reveal>
               <p className="eyebrow">About Me</p>
-              <h2>I build interfaces that are useful, clean, and easy to trust.</h2>
+              <h2>Thoughtful interfaces, built with care and real product thinking.</h2>
             </div>
 
             <div className="about-grid">
               <div className="about-copy" data-scroll-reveal>
                 <p>
-                  I’m a frontend developer with a strong focus on building responsive interfaces and mobile experiences that feel smooth and dependable. I like turning ideas into clear, usable products with careful attention to layout, interaction, and performance.
+                  I’m a frontend developer and React Native developer focused on creating digital experiences that feel deliberate, responsive, and easy to trust. I care about clarity in the interface, reliability in the build, and a product experience that feels considered from first click to final interaction.
                 </p>
                 <p>
-                  My work includes web interfaces, landing pages, and React Native app screens. I care about the details that make a product feel polished, from clean structure and readable code to thoughtful design decisions that make the experience easier to use.
+                  My work spans responsive web experiences, landing pages, and mobile app interfaces. I enjoy simplifying complexity, improving usability, and translating product ideas into interfaces that are polished without being over-designed.
                 </p>
               </div>
 
               <div className="about-highlights" data-scroll-reveal>
                 <div className="highlight-item">
-                  <strong>Frontend-first</strong>
-                  <span>Focused on UI quality, responsiveness, and user clarity.</span>
+                  <strong>Frontend-first thinking</strong>
+                  <span>Clean UI systems, responsive layouts, and practical product decisions.</span>
                 </div>
                 <div className="highlight-item">
-                  <strong>Mobile product thinking</strong>
-                  <span>Designing app experiences that are practical and easy to navigate.</span>
+                  <strong>Mobile product focus</strong>
+                  <span>App flows and experiences designed to feel intuitive on smaller screens.</span>
                 </div>
                 <div className="highlight-item">
-                  <strong>Clean execution</strong>
-                  <span>Simple structure, readable code, and work that is easy to build on.</span>
+                  <strong>Useful execution</strong>
+                  <span>Readable code, clear structure, and interface choices that support the work.</span>
                 </div>
               </div>
             </div>
