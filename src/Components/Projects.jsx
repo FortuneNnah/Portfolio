@@ -40,7 +40,7 @@ const projects = [
       "ClipFind is an AI-powered movie search platform inspired by the concept of Shazam for movies. Users can upload video clips and the system analyzes frames to identify the movie title, cast, release year, and streaming availability.",
     tags: ["React", "CSS3", "Vite","(still in progress)"],
     category: "Frontend",
-    liveUrl: "",
+    liveUrl: "https://clipfind.netlify.app",
     repoUrl: "https://github.com/FortuneNnah/ClipFInd",
     featured: true,
     year: "2024",
@@ -312,7 +312,7 @@ const Projects = () => {
               I'm always open to interesting collaborations and new challenges.
               Let's build something great together.
             </p>
-            <div className="cta-buttons">
+            <div className="cta-buttzzons">
               <a href="/contact" className="cta-button primary">Get In Touch</a>
               <a
                 href="https://github.com/FortuneNnah"

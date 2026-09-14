@@ -1,19 +1,31 @@
 export const observeElements = (selector = "[data-scroll-reveal]") => {
   const elements = document.querySelectorAll(selector);
 
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach((el) => el.classList.add('reveal'));
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("reveal");
+        entry.target.classList.add('reveal');
         observer.unobserve(entry.target);
       }
     });
   }, {
     threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
+    rootMargin: '0px 0px -50px 0px',
   });
 
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => {
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('reveal');
+      return;
+    }
+
+    observer.observe(el);
+  });
 };
 
 export const observeCountUp = (selector = "[data-count-up]") => {
