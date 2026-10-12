@@ -1062,3 +1062,310 @@ label small {
     padding: 1rem;
   }
 }
+
+
+/* ==================================================================
+   Footer
+   Dark outer frame, white rounded card, painted-cloud stage with a
+   watercolor "LET'S BUILD" wordmark and a developer illustration.
+
+   Palette (matches the portfolio)
+   #0B0F1B  ink and dark page frame
+   #FFFFFF  card
+   #5B6475  muted text
+   #2862E7  brand blue (buttons, links, wordmark)
+   #1B45B8  deep blue (link hover, wordmark base)
+   #FFB020  warm amber, illustration accents only
+================================================================== */
+
+/* ------------------------------------------------------------------
+   Outer frame
+------------------------------------------------------------------- */
+.footer {
+  position: relative;
+  padding: clamp(10px, 2vw, 24px);
+  background: #0B0F1B;
+  color: #0B0F1B;
+  font-family: inherit;
+}
+
+/* Holds the SVG watercolor filter; zero-size so it takes no space */
+.footer__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The big white rounded card */
+.footer__card {
+  max-width: 1280px;
+  margin: 0 auto;
+  border-radius: clamp(24px, 3.5vw, 40px);
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------
+   Top area: brand on the left, link columns on the right
+------------------------------------------------------------------- */
+.footer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 48px;
+  padding: clamp(32px, 5vw, 64px) clamp(24px, 6vw, 88px) 24px;
+}
+
+.footer__brand {
+  max-width: 340px;
+}
+
+/* Logo: round monogram + name */
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #0B0F1B;
+  text-decoration: none;
+}
+
+.footer__logo-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #E3E7F1;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #2862E7;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer__logo-name {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.footer__tagline {
+  margin: 16px 0 20px;
+  color: #5B6475;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Orange emphasis inside the tagline */
+.footer__highlight {
+  color: #2862E7;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
+   Social buttons
+------------------------------------------------------------------- */
+.footer__socials {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer__social {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #0B0F1B;
+  color: #FFFFFF;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.footer__social svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer__social:hover {
+  background: #2862E7;
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------------
+   Link columns
+------------------------------------------------------------------- */
+.footer__nav {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  column-gap: clamp(32px, 5vw, 80px);
+  row-gap: 32px;
+}
+
+.footer__col-title {
+  margin: 0 0 16px;
+  color: #0B0F1B;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer__list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer__link {
+  color: #5B6475;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: #1B45B8;
+}
+
+/* Contact rows: small orange icon + text */
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #5B6475;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.footer__contact-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  fill: none;
+  stroke: #2862E7;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Long emails should wrap instead of overflowing the column */
+.footer__contact-item .footer__link {
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------
+   Copyright line
+------------------------------------------------------------------- */
+.footer__copy {
+  margin: 0;
+  padding: 8px 24px 0;
+  color: #6B7280;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------
+   Stage: painted clouds, wordmark behind, illustration in front
+------------------------------------------------------------------- */
+.footer__stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: clamp(300px, 44vw, 594px);
+  margin-top: 32px;
+  overflow: hidden;
+  /* Soft gray cloud wisps on the left, right and bottom over a pale wash */
+  background:
+    radial-gradient(45% 55% at 4% 60%, #DFE3E9 0%, rgba(223, 227, 233, 0) 72%),
+    radial-gradient(40% 50% at 98% 45%, #D9DEE5 0%, rgba(217, 222, 229, 0) 72%),
+    radial-gradient(60% 40% at 50% 105%, #E9ECF0 0%, rgba(233, 236, 240, 0) 75%),
+    linear-gradient(180deg, #FFFFFF 0%, #F5F6F8 100%);
+}
+
+/* Watercolor wordmark.
+   The gradient is clipped to the text, then the SVG filter
+   (#footer-watercolor) roughens the edges and mottles the wash. */
+.footer__wordmark {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  padding: 0.06em 0.04em 0;
+  margin-top: clamp(16px, 3vw, 40px);
+  background: linear-gradient(180deg, #6E96F7 0%, #2862E7 45%, #1B45B8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: url(#footer-watercolor);
+  font-family: inherit;
+  font-size: clamp(88px, 16vw, 220px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.82;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer__wordmark-line {
+  display: block;
+}
+
+/* Illustration sits in front, anchored to the bottom edge */
+.footer__art {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 2;
+  width: min(86%, clamp(260px, 34vw, 440px));
+  height: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   Keyboard focus
+------------------------------------------------------------------- */
+.footer a:focus-visible {
+  outline: 3px solid #2862E7;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Contact gets a full row so the email never gets squeezed */
+  .footer__col--contact {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .footer__social,
+  .footer__link {
+    transition: none;
+  }
+
+  .footer__social:hover {
+    transform: none;
+  }
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import portrait from './Imgs/Meeeeeeeeee.jpeg';
 import { observeElements } from './utils/scrollReveal';
+import Footer from './Components/Footer'
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -573,28 +574,7 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <div className="container footer-inner">
-          <div>
-            <p className="footer-brand">Fortune Nnah</p>
-          </div>
-          <div className="footer-links">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>{item.label}</a>
-            ))}
-          </div>
-          <div className="footer-socials">
-            {socialLinks.map((link) => (
-              <a key={link.label} href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
-                {link.icon === 'github' && <IconGithub />}
-                {link.icon === 'linkedin' && <IconLinkedin />}
-                {link.icon === 'x' && <IconX />}
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="container footer-bottom">
-          <p>© 2026 Fortune Nnah. All rights reserved.</p>
-        </div>
+        <Footer />
       </footer>
     </div>
   );
