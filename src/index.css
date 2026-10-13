@@ -1,41 +1,85 @@
-:root {
-  --bg: #f5f7fb;
-  --surface: #ffffff;
-  --surface-alt: #eef3f8;
-  --surface-strong: #e8edf5;
-  --text: #111827;
-  --muted: #4b5563;
-  --border: rgba(17, 24, 39, 0.12);
-  --primary: #2563eb;
-  --primary-deep: #1d4ed8;
-  --secondary: #8e44ad;
-  --shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-  --radius-xl: 22px;
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 10px;
-  --container: 1180px;
-}
+/* ==================================================================
+   Fortune Nnah: portfolio stylesheet
 
-* {
+   Contents
+   01  Fonts
+   02  Reset and base
+   03  Layout: container, sections, headings
+   04  Buttons and shared bits
+   05  Painted accents: watercolor words, blobs, floating chips
+   06  Header and navigation
+   07  Scroll progress bar
+   08  Hero
+   09  Tech marquee
+   10  About
+   11  Skills
+   12  Projects
+   13  Experience
+   14  Services
+   15  Contact
+   16  Footer
+   17  Motion: scroll reveal and keyframes
+   18  Responsive: 980px, 760px, 480px
+   19  Reduced motion
+
+   Palette (plain hex values are used everywhere, no CSS variables)
+   #0B0F1B  ink: headings, dark surfaces
+   #5B6475  body text
+   #8A93A5  faint text
+   #2862E7  primary blue: buttons, links, painted words
+   #1B45B8  deep blue: hover states
+   #6E96F7  light blue: gradients and glows
+   #DCE6FF  blue tint: borders, backdrops, tags
+   #EEF3FF  pale blue tint: icon tiles, pills
+   #FFB020  secondary amber: small accents only (never for text on white)
+   #F6F7FB  page background
+   #FFFFFF  cards
+   #E3E7F1  borders
+   #B91C1C  errors
+   #16A34A  "available" status dot
+================================================================== */
+
+
+/* ==================================================================
+   01  Fonts
+   Bricolage Grotesque for headings and the wordmark, Inter for text.
+================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap");
+
+
+/* ==================================================================
+   02  Reset and base
+================================================================== */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Keeps anchored sections from hiding under the sticky header */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   margin: 0;
-  font-family: Inter, "Segoe UI", sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: #F6F7FB;
+  color: #0B0F1B;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Bricolage Grotesque", "Inter", "Segoe UI", sans-serif;
 }
 
 img {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
 }
 
 a {
@@ -53,6 +97,7 @@ button {
   cursor: pointer;
 }
 
+/* Default icon size; components override it where they need to */
 svg {
   width: 18px;
   height: 18px;
@@ -62,29 +107,325 @@ svg {
   min-height: 100vh;
 }
 
-.container {
-  width: min(var(--container), calc(100% - 2rem));
-  margin: 0 auto;
-}
-
 .app-shell {
   min-height: 100vh;
 }
 
+/* Holds the SVG watercolor filter; zero-size so it takes no space */
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+
+/* ==================================================================
+   03  Layout: container, sections, headings
+================================================================== */
+.container {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.section-block {
+  padding: 5.5rem 0;
+}
+
+/* Alternate bands get a faint dot grid so the page has rhythm */
+.section-surface {
+  background-color: #FFFFFF;
+  background-image: radial-gradient(#DDE3F0 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-top: 1px solid #E3E7F1;
+  border-bottom: 1px solid #E3E7F1;
+}
+
+.section-heading {
+  margin-bottom: 2.4rem;
+}
+
+.section-heading h2,
+.contact-panel h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.section-heading h2 {
+  max-width: 19ch;
+}
+
+/* Small label above each heading, with an amber dot */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.9rem;
+  color: #2862E7;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #FFB020;
+}
+
+
+/* ==================================================================
+   04  Buttons and shared bits
+================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.75rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+
+.btn-primary {
+  background: #2862E7;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #1B45B8;
+  box-shadow: 0 10px 22px #2862E738;
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #0B0F1B;
+  border-color: #D3DAEA;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: #2862E7;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #0B0F1B;
+  border-color: #D3DAEA;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  border-color: #0B0F1B;
+}
+
+.btn-small {
+  min-height: 2.5rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+}
+
+.social-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+
+.social-row-compact {
+  margin-top: 0;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid #D3DAEA;
+  border-radius: 0.8rem;
+  background: #FFFFFF;
+  color: #0B0F1B;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: #2862E7;
+  background: #2862E7;
+  color: #FFFFFF;
+}
+
+/* Keyboard focus ring for every link and button on the page */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #2862E7;
+  outline-offset: 3px;
+}
+
+
+/* ==================================================================
+   05  Painted accents
+   The same watercolor look as the footer wordmark, used sparingly.
+================================================================== */
+
+/* One highlighted word in a heading: blue gradient clipped to the text,
+   then roughened by the #paint-wash SVG filter (defined in App.jsx) */
+.paint {
+  display: inline-block;
+  padding: 0 0.04em;
+  background: linear-gradient(180deg, #6E96F7 0%, #2862E7 50%, #1B45B8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: url(#paint-wash);
+}
+
+/* Browsers without background-clip:text just get a solid blue word */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .paint {
+    background: none;
+    color: #2862E7;
+  }
+}
+
+/* Floating code-themed chips around the portrait (decorative) */
+.float-chip {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0B0F1B;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 700;
+  pointer-events: none;
+  animation: bob 6s ease-in-out infinite alternate;
+}
+
+.float-chip--code {
+  top: 8%;
+  left: -1.8rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: #0B0F1B;
+  color: #FFFFFF;
+  font-size: 0.95rem;
+}
+
+.float-chip--braces {
+  top: 24%;
+  right: -1.5rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: #FFB020;
+  color: #0B0F1B;
+  font-size: 1.05rem;
+  animation-delay: -2s;
+}
+
+/* Design-tool cursor with a name tag */
+.float-cursor {
+  position: absolute;
+  z-index: 3;
+  bottom: 22%;
+  left: -1.4rem;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+  animation: bob 7s ease-in-out infinite alternate;
+  animation-delay: -4s;
+}
+
+.float-cursor svg {
+  width: 1.7rem;
+  height: 2.3rem;
+  fill: #FFB020;
+  stroke: #0B0F1B;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.float-cursor span {
+  margin: 1.6rem 0 0 -0.2rem;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid #0B0F1B;
+  border-radius: 999px;
+  background: #FFB020;
+  color: #0B0F1B;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sparkle {
+  position: absolute;
+  z-index: 3;
+  width: 1.7rem;
+  height: 1.7rem;
+  stroke: #0B0F1B;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  pointer-events: none;
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+.sparkle--blue {
+  top: -1rem;
+  right: 22%;
+  fill: #2862E7;
+}
+
+.sparkle--amber {
+  bottom: -0.7rem;
+  left: 34%;
+  fill: #FFB020;
+  animation-delay: -1.8s;
+}
+
+
+/* ==================================================================
+   06  Header and navigation
+================================================================== */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 30;
   backdrop-filter: blur(12px);
-  background: rgba(245, 247, 251, 0.82);
-  border-bottom: 1px solid var(--border);
+  background: #F6F7FBD1;
+  border-bottom: 1px solid #E3E7F1;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 78px;
+  min-height: 76px;
   gap: 1rem;
 }
 
@@ -92,8 +433,9 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
 }
 
 .brand-mark {
@@ -102,15 +444,21 @@ svg {
   justify-content: center;
   width: 2.6rem;
   height: 2.6rem;
-  border: 1px solid var(--border);
+  border: 1px solid #E3E7F1;
   border-radius: 999px;
-  background: var(--surface);
-  color: var(--primary);
-  font-size: 1rem;
+  background: #FFFFFF;
+  color: #2862E7;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(-12deg) scale(1.06);
 }
 
 .brand-name {
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .nav-panel {
@@ -127,8 +475,9 @@ svg {
 
 .nav-links a {
   position: relative;
-  color: var(--muted);
+  color: #5B6475;
   font-size: 0.95rem;
+  font-weight: 500;
   transition: color 0.2s ease;
 }
 
@@ -139,19 +488,22 @@ svg {
   bottom: -0.45rem;
   width: 100%;
   height: 2px;
-  background: var(--primary);
+  border-radius: 2px;
+  background: #2862E7;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
 }
 
 .nav-links a:hover,
-.nav-links a:focus-visible {
-  color: var(--text);
+.nav-links a:focus-visible,
+.nav-links a.is-active {
+  color: #0B0F1B;
 }
 
 .nav-links a:hover::after,
-.nav-links a:focus-visible::after {
+.nav-links a:focus-visible::after,
+.nav-links a.is-active::after {
   transform: scaleX(1);
 }
 
@@ -159,162 +511,161 @@ svg {
   display: none;
   width: 3rem;
   height: 2.7rem;
-  border: 1px solid var(--border);
-  border-radius: 0.9rem;
-  background: var(--surface);
   padding: 0.7rem 0.65rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 0.9rem;
+  background: #FFFFFF;
 }
 
 .nav-toggle span {
   display: block;
   height: 2px;
-  background: var(--text);
   border-radius: 999px;
+  background: #0B0F1B;
 }
 
 .nav-toggle span + span {
   margin-top: 0.36rem;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  min-height: 2.9rem;
-  padding: 0.75rem 1.2rem;
-  border-radius: 0.8rem;
-  border: 1px solid transparent;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+/* ==================================================================
+   07  Scroll progress bar
+   Only shown where CSS scroll-driven animation is supported.
+================================================================== */
+.scroll-progress {
+  display: none;
 }
 
-.btn:hover,
-.btn:focus-visible {
-  transform: translateY(-1px);
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    height: 3px;
+    background: linear-gradient(90deg, #FFB020, #2862E7);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    animation: progress linear both;
+    animation-timeline: scroll(root block);
+  }
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: none;
-}
 
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  background: var(--primary-deep);
-}
-
-.btn-secondary {
-  background: var(--surface);
-  color: var(--text);
-  border-color: var(--border);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-
-.btn-small {
-  min-height: 2.5rem;
-  padding: 0.65rem 1rem;
-  font-size: 0.9rem;
-}
-
+/* ==================================================================
+   08  Hero
+================================================================== */
 .hero-section {
-  padding: 4.2rem 0 3rem;
+  position: relative;
+  overflow: hidden;
+  padding: 3.8rem 0 4.5rem;
+}
+
+/* Soft painted clouds behind the hero, like the footer stage */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 55% at 0% 30%, #E4E9F5 0%, #E4E9F500 70%),
+    radial-gradient(38% 50% at 100% 70%, #DDE6FA 0%, #DDE6FA00 72%),
+    radial-gradient(50% 35% at 50% 100%, #EAEEF7 0%, #EAEEF700 75%);
 }
 
 .hero-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  gap: 2.2rem;
+  gap: 2.5rem;
 }
 
 .hero-copy {
   max-width: 45rem;
 }
 
-.eyebrow {
-  margin: 0 0 0.8rem;
-  color: var(--primary);
-  font-size: 0.76rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.hero-copy h1,
-.section-heading h2,
-.contact-panel h2 {
-  margin: 0;
-  letter-spacing: -0.06em;
-  line-height: 1.03;
-}
-
 .hero-copy h1 {
-  font-size: clamp(2.7rem, 5vw, 4.8rem);
-  max-width: 11.5ch;
+  margin: 0;
+  max-width: 14ch;
+  font-size: clamp(2.5rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
 }
 
 .lead {
-  margin: 1.1rem 0 0;
-  color: var(--muted);
-  font-size: 1.02rem;
   max-width: 32rem;
+  margin: 1.2rem 0 0;
+  color: #5B6475;
+  font-size: 1.05rem;
 }
 
 .cta-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 1.7rem;
-}
-
-.social-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
   margin-top: 1.8rem;
 }
 
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.7rem;
-  height: 2.7rem;
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  background: transparent;
-  color: var(--text);
-  border-radius: 0.7rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.social-link:hover,
-.social-link:focus-visible {
-  border-color: rgba(37, 99, 235, 0.35);
-  transform: translateY(-1px);
-}
-
+/* Portrait column. It hugs the card so the floating chips stay attached. */
 .hero-visual {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  isolation: isolate;
+  justify-self: center;
+  width: min(100%, 27rem);
+}
+
+.hero-blob {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+.hero-blob--blue {
+  top: -8%;
+  right: -18%;
+  width: 70%;
+  height: 55%;
+  background: #6E96F7;
+  opacity: 0.45;
+}
+
+.hero-blob--amber {
+  bottom: -6%;
+  left: -16%;
+  width: 42%;
+  height: 34%;
+  background: #FFB020;
+  opacity: 0.35;
 }
 
 .portrait-card {
   position: relative;
-  width: min(100%, 27rem);
-  padding: 0.4rem;
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: 1.05rem;
-  background: transparent;
-  box-shadow: none;
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 1.4rem;
+  background: #FFFFFF;
+  box-shadow: 0 24px 60px #2862E71F;
+}
+
+/* Tilted tinted card peeking out behind the portrait */
+.portrait-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 1.4rem;
+  background: #DCE6FF;
+  transform: translate(0.9rem, 0.9rem) rotate(3deg);
 }
 
 .portrait-card img {
@@ -322,7 +673,7 @@ svg {
   height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 0.9rem;
+  border-radius: 1.05rem;
 }
 
 .presence-card {
@@ -332,74 +683,141 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: 0.7rem;
-  padding: 0.7rem 0.8rem;
-  box-shadow: none;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 0.8rem;
+  background: #FFFFFFF0;
 }
 
 .presence-label {
-  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #5B6475;
   font-size: 0.72rem;
+}
+
+/* Pulsing green dot: she is available */
+.presence-label::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #16A34A;
+  animation: ping 2s ease-out infinite;
 }
 
 .presence-card strong {
   font-size: 0.9rem;
 }
 
-.section-block {
-  padding: 5rem 0;
+
+/* ==================================================================
+   09  Tech marquee
+   Scrolls the second copy of the list in behind the first for a
+   seamless loop. Paused on hover.
+================================================================== */
+.marquee {
+  overflow: hidden;
+  padding: 1.1rem 0;
+  border-top: 1px solid #E3E7F1;
+  border-bottom: 1px solid #E3E7F1;
+  background: #FFFFFF;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000000 8%, #000000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000000 8%, #000000 92%, transparent);
 }
 
-.section-surface {
-  background: transparent;
-  border-top: 1px solid rgba(17, 24, 39, 0.06);
-  border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
 }
 
-.section-heading {
-  margin-bottom: 1.9rem;
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
 }
 
-.section-heading h2,
-.contact-panel h2 {
-  font-size: clamp(2rem, 3.2vw, 2.6rem);
-  max-width: 15ch;
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 2.4rem;
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
+.marquee__item::after {
+  content: "✦";
+  margin-left: 2.4rem;
+  color: #FFB020;
+  font-size: 0.9rem;
+}
+
+
+/* ==================================================================
+   10  About
+================================================================== */
 .about-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: start;
 }
 
 .about-copy {
+  color: #5B6475;
   font-size: 1.02rem;
-  color: var(--muted);
 }
 
 .about-copy p {
-  margin: 0 0 1rem;
   max-width: 42rem;
+  margin: 0 0 1rem;
+}
+
+/* First paragraph reads as an intro */
+.about-copy p:first-child {
+  color: #0B0F1B;
+  font-size: 1.18rem;
+  line-height: 1.65;
 }
 
 .about-highlights {
   display: grid;
   gap: 0.35rem;
-  padding-top: 0.1rem;
 }
 
 .highlight-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  padding: 1rem 0 1rem 1.2rem;
+  border-bottom: 1px solid #E3E7F1;
+  transition: padding-left 0.25s ease;
+}
+
+/* Amber bar slides in on hover */
+.highlight-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.1rem;
+  bottom: 1.1rem;
+  width: 3px;
+  border-radius: 3px;
+  background: #E3E7F1;
+  transition: background-color 0.25s ease;
+}
+
+.highlight-item:hover {
+  padding-left: 1.5rem;
+}
+
+.highlight-item:hover::before {
+  background: #FFB020;
 }
 
 .highlight-item:last-child {
@@ -407,45 +825,75 @@ svg {
 }
 
 .highlight-item strong {
-  font-size: 1rem;
-  letter-spacing: -0.03em;
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
 }
 
 .highlight-item span {
-  color: var(--muted);
+  color: #5B6475;
   line-height: 1.5;
 }
 
+
+/* ==================================================================
+   11  Skills
+   Six-column grid: the two main groups are wide, the other three
+   share the second row evenly.
+================================================================== */
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.1rem;
 }
 
 .skill-card {
+  position: relative;
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  min-height: 11.2rem;
-  padding: 1.2rem 1rem;
-  background: var(--surface);
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: var(--radius-md);
-  box-shadow: none;
+  gap: 1rem;
+  min-height: 10.5rem;
+  padding: 1.4rem 1.3rem;
+  overflow: hidden;
+  border: 1px solid #E3E7F1;
+  border-radius: 1rem;
+  background: #FFFFFF;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: #B9CBF7;
+  box-shadow: 0 18px 36px #0B0F1B14;
 }
 
 .skill-card h3 {
   margin: 0;
-  font-size: 1rem;
-  letter-spacing: -0.03em;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
 }
 
 .skill-card-primary {
-  min-height: 12.5rem;
-  padding: 1.35rem 1.1rem;
-  border-color: rgba(37, 99, 235, 0.18);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: none;
+  grid-column: span 3;
+  min-height: 12rem;
+  border-color: #CBDAFB;
+  background: #FFFFFF;
+}
+
+/* Soft blue glow in the corner of the two main cards */
+.skill-card-primary::after {
+  content: "";
+  position: absolute;
+  top: -3.5rem;
+  right: -3.5rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: #6E96F7;
+  opacity: 0.18;
+  filter: blur(22px);
+  pointer-events: none;
 }
 
 .skill-list {
@@ -458,123 +906,101 @@ svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  background: var(--surface-alt);
-  color: var(--text);
-  padding: 0.4rem 0.65rem;
-  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 0.55rem;
+  background: #F4F7FD;
+  color: #0B0F1B;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.skill-pill:hover {
+  transform: translateY(-2px) rotate(-2deg);
+  border-color: #2862E7;
+  background: #2862E7;
+  color: #FFFFFF;
 }
 
 .skill-card-primary .skill-pill {
-  border-color: rgba(37, 99, 235, 0.1);
-  background: rgba(37, 99, 235, 0.04);
-  color: var(--primary-deep);
+  border-color: #D5E1FC;
+  background: #EEF3FF;
+  color: #1B45B8;
 }
 
+.skill-card-primary .skill-pill:hover {
+  border-color: #2862E7;
+  background: #2862E7;
+  color: #FFFFFF;
+}
+
+
+/* ==================================================================
+   12  Projects
+   Six-column grid so a short last row is centered, whether it holds
+   one card or two.
+================================================================== */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.3rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.4rem;
 }
 
 .project-card {
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
-  background: var(--surface);
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: none;
-  transition: transform 0.2s ease;
+  border: 1px solid #E3E7F1;
+  border-radius: 1.1rem;
+  background: #FFFFFF;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .project-card:hover,
 .project-card:focus-within {
-  transform: translateY(-2px);
-  box-shadow: none;
+  transform: translateY(-5px);
+  border-color: #B9CBF7;
+  box-shadow: 0 22px 44px #0B0F1B1A;
 }
 
+/* Center a last row of two cards, or a single leftover card */
+.project-card:nth-child(3n + 1):nth-last-child(2) {
+  grid-column: 2 / span 2;
+}
+
+.project-card:nth-child(3n + 1):last-child {
+  grid-column: 3 / span 2;
+}
+
+/* Screenshot area: a fixed 16:10 frame keeps every card the same height.
+   Export screenshots at 1200 x 750. */
 .project-visual {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 11.5rem;
-  padding: 1rem;
-  background: #f1f5f9;
-  border-bottom: 1px solid var(--border);
-}
-
-.mock-browser {
-  width: 100%;
-  max-width: 19rem;
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: 0.9rem;
-  background: var(--surface);
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-  box-shadow: none;
+  border-bottom: 1px solid #E3E7F1;
+  background: #F1F5F9;
 }
 
-.browser-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.42rem;
-  padding: 0.7rem 0.8rem;
-  border-bottom: 1px solid var(--border);
-  background: #f8fafc;
+/* Fill the frame and crop from the top so each site's hero shows */
+.project-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.45s ease;
 }
 
-.browser-bar span {
-  width: 0.62rem;
-  height: 0.62rem;
-  border-radius: 50%;
-  background: rgba(17, 24, 39, 0.15);
+.project-card:hover .project-image,
+.project-card:focus-within .project-image {
+  transform: scale(1.05);
 }
 
-.browser-content {
-  display: grid;
-  grid-template-columns: 4.5rem 1fr;
-  gap: 0.9rem;
-  padding: 0.9rem;
-  min-height: 7.5rem;
-}
-
-.browser-sidebar {
-  border-radius: 0.75rem;
-  background: #edf2f7;
-}
-
-.browser-main {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.browser-line {
-  height: 0.68rem;
-  border-radius: 999px;
-  background: #e2e8f0;
-}
-
-.browser-line-lg {
-  width: 65%;
-}
-
-.browser-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-top: 0.3rem;
-}
-
-.browser-grid div {
-  height: 2.8rem;
-  border-radius: 0.7rem;
-  background: #edf2f7;
-}
-
+/* Category badge over the screenshot */
 .project-badge {
   position: absolute;
   right: 0.9rem;
@@ -582,14 +1008,14 @@ svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.38rem 0.6rem;
-  border: 1px solid rgba(37, 99, 235, 0.12);
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--primary-deep);
+  padding: 0.38rem 0.65rem;
+  border: 1px solid #CBDAFB;
+  border-radius: 999px;
+  background: #FFFFFFEB;
+  color: #1B45B8;
   font-size: 0.66rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -610,24 +1036,29 @@ svg {
 
 .project-header h3 {
   margin: 0;
-  font-size: 1.3rem;
-}
-
-.project-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.45rem 0.6rem;
-  border: 1px solid rgba(142, 68, 173, 0.2);
-  border-radius: 999px;
-  background: rgba(142, 68, 173, 0.04);
-  color: var(--secondary);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
 }
 
 .project-body p {
   margin: 0;
-  color: var(--muted);
+  color: #5B6475;
+}
+
+/* One-line role or result, with a small blue label in front */
+.project-body .project-highlight {
+  color: #0B0F1B;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.project-highlight strong {
+  margin-right: 0.5rem;
+  color: #2862E7;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .project-stack {
@@ -641,14 +1072,15 @@ svg {
   align-items: center;
   justify-content: center;
   padding: 0.35rem 0.65rem;
-  border: 1px solid var(--border);
+  border: 1px solid #E3E7F1;
   border-radius: 999px;
-  background: var(--surface-alt);
-  color: var(--muted);
+  background: #F4F7FD;
+  color: #5B6475;
   font-size: 0.72rem;
   font-weight: 600;
 }
 
+/* Pushes the buttons to the bottom so every card lines up */
 .project-links {
   display: flex;
   flex-wrap: wrap;
@@ -656,28 +1088,33 @@ svg {
   margin-top: auto;
 }
 
+
+/* ==================================================================
+   13  Experience
+================================================================== */
 .timeline {
   display: grid;
   gap: 1.4rem;
 }
 
 .timeline-item {
+  position: relative;
   display: grid;
   grid-template-columns: 1.5rem minmax(0, 1fr);
   align-items: start;
   gap: 1.1rem;
-  position: relative;
   padding-left: 0.4rem;
 }
 
+/* Vertical line joining the dots */
 .timeline-item::before {
   content: "";
   position: absolute;
   left: 0.66rem;
   top: 0.5rem;
   bottom: -1.5rem;
-  width: 1px;
-  background: var(--border);
+  width: 2px;
+  background: #D3DAEA;
 }
 
 .timeline-item:last-child::before {
@@ -685,83 +1122,143 @@ svg {
 }
 
 .timeline-dot {
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  background: var(--primary);
-  border: 0.28rem solid #fff;
-  box-shadow: 0 0 0 1px var(--border);
-  margin-top: 0.4rem;
   position: relative;
   z-index: 1;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.4rem;
+  border: 0.28rem solid #FFFFFF;
+  border-radius: 50%;
+  background: #2862E7;
+  box-shadow: 0 0 0 1px #D3DAEA;
+}
+
+/* The current role gets a pulsing ring */
+.timeline-item:first-child .timeline-dot::after {
+  content: "";
+  position: absolute;
+  inset: -0.28rem;
+  border-radius: 50%;
+  border: 2px solid #2862E7;
+  animation: pulse-ring 2.4s ease-out infinite;
 }
 
 .timeline-content {
-  background: var(--surface);
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: var(--radius-md);
-  padding: 1.2rem 1.25rem;
-  box-shadow: none;
+  padding: 1.3rem 1.4rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 1rem;
+  background: #FFFFFF;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.timeline-content:hover {
+  transform: translateX(4px);
+  border-color: #B9CBF7;
+  box-shadow: 0 16px 32px #0B0F1B12;
 }
 
 .timeline-topline {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  align-items: center;
   margin-bottom: 0.4rem;
 }
 
 .timeline-topline h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
 }
 
-.timeline-topline span,
-.timeline-company {
-  color: var(--muted);
-  font-size: 0.9rem;
+/* Period shown as a small pill */
+.timeline-topline span {
+  flex: none;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #EEF3FF;
+  color: #1B45B8;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .timeline-company {
-  margin: 0 0 0.8rem;
+  margin: 0 0 0.9rem;
+  color: #5B6475;
+  font-size: 0.95rem;
 }
 
 .timeline-content ul {
   margin: 0;
   padding-left: 1.1rem;
-  color: var(--muted);
+  color: #5B6475;
 }
 
 .timeline-content li + li {
   margin-top: 0.45rem;
 }
 
+.timeline-content li::marker {
+  color: #FFB020;
+}
+
+
+/* ==================================================================
+   14  Services
+   Cards are numbered with a CSS counter, so there's nothing to
+   maintain in the markup.
+================================================================== */
 .service-grid {
+  counter-reset: service;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
 }
 
 .service-card {
+  counter-increment: service;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  padding: 1.3rem 1.15rem;
-  background: var(--surface);
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: var(--radius-md);
-  box-shadow: none;
+  padding: 1.5rem 1.3rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 1rem;
+  background: #FFFFFF;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-card::after {
+  content: counter(service, decimal-leading-zero);
+  position: absolute;
+  top: 1.3rem;
+  right: 1.3rem;
+  color: #C5CDDF;
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  transition: color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #B9CBF7;
+  box-shadow: 0 20px 40px #0B0F1B14;
+}
+
+.service-card:hover::after {
+  color: #FFB020;
 }
 
 .service-card h3 {
-  margin: 0;
-  font-size: 1.15rem;
+  margin: 0.2rem 0 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
 }
 
 .service-card p {
   margin: 0;
-  color: var(--muted);
+  color: #5B6475;
 }
 
 .service-icon {
@@ -771,10 +1268,30 @@ svg {
   width: 3rem;
   height: 3rem;
   border-radius: 0.9rem;
-  background: rgba(37, 99, 235, 0.06);
-  color: var(--primary);
+  background: #EEF3FF;
+  color: #2862E7;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
+/* Icon fills in blue and the arrow nudges forward on hover */
+.service-card:hover .service-icon {
+  background: #2862E7;
+  color: #FFFFFF;
+  transform: rotate(-6deg);
+}
+
+.service-icon svg {
+  transition: transform 0.25s ease;
+}
+
+.service-card:hover .service-icon svg {
+  transform: translateX(3px);
+}
+
+
+/* ==================================================================
+   15  Contact
+================================================================== */
 .contact-layout {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -784,16 +1301,36 @@ svg {
 
 .contact-panel,
 .form-panel {
-  padding: 1.5rem;
-  border: 1px solid rgba(17, 24, 39, 0.08);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: none;
+  padding: 1.8rem;
+  border: 1px solid #E3E7F1;
+  border-radius: 1.2rem;
+  background: #FFFFFF;
+}
+
+.contact-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Painted glow tucked into the top-right corner of the contact card */
+.contact-panel::before {
+  content: "";
+  position: absolute;
+  top: -4rem;
+  right: -4rem;
+  z-index: -1;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  background: #6E96F7;
+  opacity: 0.25;
+  filter: blur(30px);
 }
 
 .contact-copy {
-  margin: 0.8rem 0 1.5rem;
-  color: var(--muted);
+  margin: 0.9rem 0 1.5rem;
+  color: #5B6475;
 }
 
 .contact-list {
@@ -807,7 +1344,15 @@ svg {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: var(--text);
+  color: #0B0F1B;
+}
+
+.contact-list a span:last-child {
+  transition: color 0.2s ease;
+}
+
+.contact-list a:hover span:last-child {
+  color: #2862E7;
 }
 
 .contact-icon {
@@ -817,14 +1362,17 @@ svg {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.8rem;
-  background: rgba(37, 99, 235, 0.05);
-  color: var(--primary);
+  background: #EEF3FF;
+  color: #2862E7;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.social-row-compact {
-  margin-top: 0;
+.contact-list a:hover .contact-icon {
+  background: #2862E7;
+  color: #FFFFFF;
 }
 
+/* Form */
 form {
   display: grid;
   gap: 1rem;
@@ -839,7 +1387,7 @@ form {
 label {
   display: grid;
   gap: 0.45rem;
-  color: var(--text);
+  color: #0B0F1B;
   font-weight: 600;
 }
 
@@ -850,19 +1398,20 @@ label span {
 input,
 textarea {
   width: 100%;
-  border: 1px solid rgba(17, 24, 39, 0.12);
-  border-radius: 0.75rem;
-  background: var(--bg);
-  color: var(--text);
   padding: 0.85rem 0.9rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #D3DAEA;
+  border-radius: 0.75rem;
+  background: #F6F7FB;
+  color: #0B0F1B;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: rgba(37, 99, 235, 0.45);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+  border-color: #2862E7;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 4px #2862E71A;
 }
 
 textarea {
@@ -871,8 +1420,16 @@ textarea {
 }
 
 label small {
-  color: #b91c1c;
-  font-size: 0.72rem;
+  color: #B91C1C;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Shown above the submit button when sending fails */
+.form-error {
+  margin: 0;
+  color: #B91C1C;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -890,197 +1447,22 @@ label small {
 .success-state h3 {
   margin: 0;
   font-size: 2rem;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
 }
 
 .success-state p {
   margin: 0;
-  color: var(--muted);
-}
-
-.site-footer {
-  padding: 2rem 0 1.8rem;
-  border-top: 1px solid var(--border);
-  background: #f3f6fb;
-}
-
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.footer-brand {
-  margin: 0;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-}
-
-.footer-links,
-.footer-socials {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.footer-links a,
-.footer-socials a {
-  color: var(--muted);
-}
-
-.footer-socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--surface);
-}
-
-.footer-bottom {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-[data-scroll-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-[data-scroll-reveal].reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 980px) {
-  .hero-layout,
-  .about-grid,
-  .contact-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .skill-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .project-grid,
-  .service-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .skill-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 760px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-panel {
-    position: absolute;
-    left: 1rem;
-    right: 1rem;
-    top: calc(100% + 0.5rem);
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow);
-  }
-
-  .nav-panel.open {
-    display: flex;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-
-  .nav-cta {
-    width: 100%;
-  }
-
-  .hero-section {
-    padding-top: 3.8rem;
-  }
-
-  .cta-row,
-  .field-row,
-  .project-grid,
-  .service-grid,
-  .skill-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-row {
-    display: grid;
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-copy h1 {
-    max-width: 11ch;
-  }
-
-  .section-block {
-    padding: 4rem 0;
-  }
-
-  .contact-panel,
-  .form-panel {
-    padding: 1.2rem;
-  }
-
-  .timeline-content {
-    padding: 1rem;
-  }
+  color: #5B6475;
 }
 
 
 /* ==================================================================
-   Footer
+   16  Footer
    Dark outer frame, white rounded card, painted-cloud stage with a
    watercolor "LET'S BUILD" wordmark and a developer illustration.
-
-   Palette (matches the portfolio)
-   #0B0F1B  ink and dark page frame
-   #FFFFFF  card
-   #5B6475  muted text
-   #2862E7  brand blue (buttons, links, wordmark)
-   #1B45B8  deep blue (link hover, wordmark base)
-   #FFB020  warm amber, illustration accents only
 ================================================================== */
 
-/* ------------------------------------------------------------------
-   Outer frame
-------------------------------------------------------------------- */
+/* Outer frame */
 .footer {
   position: relative;
   padding: clamp(10px, 2vw, 24px);
@@ -1106,9 +1488,7 @@ label small {
   overflow: hidden;
 }
 
-/* ------------------------------------------------------------------
-   Top area: brand on the left, link columns on the right
-------------------------------------------------------------------- */
+/* Top area: brand on the left, link columns on the right */
 .footer__top {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1144,9 +1524,10 @@ label small {
 }
 
 .footer__logo-name {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
   font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .footer__tagline {
@@ -1156,15 +1537,13 @@ label small {
   line-height: 1.6;
 }
 
-/* Orange emphasis inside the tagline */
+/* Blue emphasis inside the tagline */
 .footer__highlight {
   color: #2862E7;
   font-weight: 600;
 }
 
-/* ------------------------------------------------------------------
-   Social buttons
-------------------------------------------------------------------- */
+/* Social buttons */
 .footer__socials {
   display: flex;
   gap: 10px;
@@ -1195,9 +1574,7 @@ label small {
   transform: translateY(-2px);
 }
 
-/* ------------------------------------------------------------------
-   Link columns
-------------------------------------------------------------------- */
+/* Link columns */
 .footer__nav {
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -1208,6 +1585,7 @@ label small {
 .footer__col-title {
   margin: 0 0 16px;
   color: #0B0F1B;
+  font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -1233,7 +1611,7 @@ label small {
   color: #1B45B8;
 }
 
-/* Contact rows: small orange icon + text */
+/* Contact rows: small blue icon + text */
 .footer__contact-item {
   display: flex;
   align-items: flex-start;
@@ -1255,14 +1633,12 @@ label small {
   stroke-linejoin: round;
 }
 
-/* Long emails should wrap instead of overflowing the column */
+/* Long emails wrap instead of overflowing the column */
 .footer__contact-item .footer__link {
   overflow-wrap: anywhere;
 }
 
-/* ------------------------------------------------------------------
-   Copyright line
-------------------------------------------------------------------- */
+/* Copyright line */
 .footer__copy {
   margin: 0;
   padding: 8px 24px 0;
@@ -1271,9 +1647,7 @@ label small {
   text-align: center;
 }
 
-/* ------------------------------------------------------------------
-   Stage: painted clouds, wordmark behind, illustration in front
-------------------------------------------------------------------- */
+/* Stage: painted clouds, wordmark behind, illustration in front */
 .footer__stage {
   position: relative;
   display: flex;
@@ -1283,15 +1657,14 @@ label small {
   overflow: hidden;
   /* Soft gray cloud wisps on the left, right and bottom over a pale wash */
   background:
-    radial-gradient(45% 55% at 4% 60%, #DFE3E9 0%, rgba(223, 227, 233, 0) 72%),
-    radial-gradient(40% 50% at 98% 45%, #D9DEE5 0%, rgba(217, 222, 229, 0) 72%),
-    radial-gradient(60% 40% at 50% 105%, #E9ECF0 0%, rgba(233, 236, 240, 0) 75%),
+    radial-gradient(45% 55% at 4% 60%, #DFE3E9 0%, #DFE3E900 72%),
+    radial-gradient(40% 50% at 98% 45%, #D9DEE5 0%, #D9DEE500 72%),
+    radial-gradient(60% 40% at 50% 105%, #E9ECF0 0%, #E9ECF000 75%),
     linear-gradient(180deg, #FFFFFF 0%, #F5F6F8 100%);
 }
 
-/* Watercolor wordmark.
-   The gradient is clipped to the text, then the SVG filter
-   (#footer-watercolor) roughens the edges and mottles the wash. */
+/* Watercolor wordmark: the gradient is clipped to the text, then the SVG
+   filter (#footer-watercolor) roughens the edges and mottles the wash. */
 .footer__wordmark {
   position: relative;
   z-index: 1;
@@ -1303,7 +1676,7 @@ label small {
   background-clip: text;
   color: transparent;
   filter: url(#footer-watercolor);
-  font-family: inherit;
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
   font-size: clamp(88px, 16vw, 220px);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -1328,19 +1701,196 @@ label small {
   pointer-events: none;
 }
 
-/* ------------------------------------------------------------------
-   Keyboard focus
-------------------------------------------------------------------- */
+/* Keyboard focus inside the footer */
 .footer a:focus-visible {
   outline: 3px solid #2862E7;
   outline-offset: 3px;
   border-radius: 6px;
 }
 
-/* ------------------------------------------------------------------
-   Responsive
-------------------------------------------------------------------- */
-@media (max-width: 960px) {
+
+/* ==================================================================
+   17  Motion: scroll reveal and keyframes
+================================================================== */
+
+/* Elements marked data-scroll-reveal fade up when they enter view
+   (utils/scrollReveal.js adds the .reveal class) */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-scroll-reveal].reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cards in a grid arrive one after another */
+.skill-card:nth-child(2),
+.project-card:nth-child(2),
+.service-card:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.skill-card:nth-child(3),
+.project-card:nth-child(3),
+.service-card:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.skill-card:nth-child(4),
+.project-card:nth-child(4),
+.service-card:nth-child(4) {
+  transition-delay: 0.08s;
+}
+
+.skill-card:nth-child(5),
+.project-card:nth-child(5),
+.service-card:nth-child(5) {
+  transition-delay: 0.16s;
+}
+
+.service-card:nth-child(6) {
+  transition-delay: 0.24s;
+}
+
+/* Hero entrance: the intro lines rise one after another, the portrait pops in */
+.hero-copy > * {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.hero-copy > :nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.hero-copy > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.hero-copy > :nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.hero-copy > :nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.hero-visual {
+  animation: pop-in 0.9s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+}
+
+/* Gentle floating for the decorative chips */
+@keyframes bob {
+  from {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  to {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.25) rotate(20deg);
+  }
+}
+
+/* Expanding ring on the green "available" dot */
+@keyframes ping {
+  0% {
+    box-shadow: 0 0 0 0 #16A34A80;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0.55rem #16A34A00;
+  }
+}
+
+/* Expanding ring on the current-role timeline dot */
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.85);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+/* ==================================================================
+   18  Responsive
+================================================================== */
+
+/* ---- Tablets and below ---- */
+@media (max-width: 980px) {
+  .hero-layout,
+  .about-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy h1 {
+    max-width: 16ch;
+  }
+
+  /* Two columns; the last odd card spans the full row */
+  .skill-grid,
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-grid > .skill-card,
+  .skill-grid > .skill-card-primary,
+  .project-grid > .project-card:nth-child(n) {
+    grid-column: auto;
+  }
+
+  .skill-grid > .skill-card:last-child,
+  .project-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Footer stacks */
   .footer__top {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
@@ -1356,16 +1906,187 @@ label small {
   }
 }
 
-/* ------------------------------------------------------------------
-   Reduced motion
-------------------------------------------------------------------- */
+/* ---- Phones ---- */
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-panel {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    top: calc(100% + 0.5rem);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    border: 1px solid #E3E7F1;
+    border-radius: 1rem;
+    background: #FFFFFFFA;
+    box-shadow: 0 16px 36px #0B0F1B1A;
+  }
+
+  .nav-panel.open {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .nav-cta {
+    width: 100%;
+  }
+
+  .hero-section {
+    padding-top: 3rem;
+  }
+
+  .cta-row {
+    display: grid;
+  }
+
+  .skill-grid,
+  .project-grid,
+  .service-grid,
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-grid > .skill-card:last-child,
+  .project-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  /* Keep the floating chips inside the screen edges */
+  .float-chip--code {
+    left: -0.4rem;
+  }
+
+  .float-chip--braces {
+    right: -0.4rem;
+  }
+
+  .float-cursor {
+    left: -0.4rem;
+  }
+
+  .timeline-topline {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---- Small phones ---- */
+@media (max-width: 480px) {
+  .hero-copy h1 {
+    max-width: 12ch;
+  }
+
+  .section-block {
+    padding: 4rem 0;
+  }
+
+  .contact-panel,
+  .form-panel {
+    padding: 1.3rem;
+  }
+
+  .timeline-content {
+    padding: 1.1rem;
+  }
+
+  .footer__nav {
+    column-gap: 24px;
+  }
+}
+
+
+/* ==================================================================
+   19  Reduced motion
+   Everything is still visible; nothing moves.
+================================================================== */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Show revealed content immediately */
+  [data-scroll-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Stop all decorative and entrance animation */
+  .hero-copy > *,
+  .hero-visual,
+  .float-chip,
+  .float-cursor,
+  .sparkle,
+  .presence-label::before,
+  .timeline-item:first-child .timeline-dot::after,
+  .scroll-progress {
+    animation: none;
+  }
+
+  /* Marquee becomes a static, wrapped row showing the list once */
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee__track {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    row-gap: 0.5rem;
+    animation: none;
+  }
+
+  .marquee__item:nth-child(n + 11) {
+    display: none;
+  }
+
+  /* No hover movement or transition anywhere */
+  .btn,
+  .social-link,
+  .brand-mark,
+  .skill-card,
+  .skill-pill,
+  .project-card,
+  .project-image,
+  .timeline-content,
+  .service-card,
+  .service-icon,
+  .service-icon svg,
+  .highlight-item,
   .footer__social,
   .footer__link {
     transition: none;
   }
 
+  .btn:hover,
+  .btn:focus-visible,
+  .social-link:hover,
+  .brand:hover .brand-mark,
+  .skill-card:hover,
+  .skill-pill:hover,
+  .project-card:hover,
+  .project-card:focus-within,
+  .project-card:hover .project-image,
+  .project-card:focus-within .project-image,
+  .timeline-content:hover,
+  .service-card:hover,
+  .service-card:hover .service-icon,
+  .service-card:hover .service-icon svg,
   .footer__social:hover {
     transform: none;
+  }
+
+  .highlight-item:hover {
+    padding-left: 1.2rem;
   }
 }

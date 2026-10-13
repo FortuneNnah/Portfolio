@@ -1,7 +1,19 @@
 import { useEffect, useState } from 'react';
 import portrait from './Imgs/Meeeeeeeeee.jpeg';
 import { observeElements } from './utils/scrollReveal';
-import Footer from './Components/Footer'
+import Footer from './Components/Footer';
+import ProjectGrid from './Components/Projects';
+
+/* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
+import clipfindImg from './assets/projects/clipfind.png';
+import novraImg from './assets/projects/Nevora.png';
+import empirebakesImg from './assets/projects/empirebakes.png';
+import chapelImg from './assets/projects/chapelofpraise.png';
+import aimImg from './assets/projects/AIM.png';
+
+/* Where the contact form posts to. Add VITE_FORM_ENDPOINT to your .env
+   (for example a Formspree URL like https://formspree.io/f/xxxxxxxx). */
+const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT;
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -36,6 +48,7 @@ const skillGroups = [
   },
 ];
 
+/* NOTE: the highlight lines are drafts. Edit them to match your real role or results. */
 const projects = [
   {
     name: 'ClipFind',
@@ -44,6 +57,9 @@ const projects = [
     liveUrl: 'https://clipfind.netlify.app',
     githubUrl: 'https://github.com/FortuneNnah/ClipFInd',
     label: 'Product',
+    image: clipfindImg,
+    imageAlt: 'ClipFind search page showing movie results',
+    highlight: { label: 'Role', text: 'Built the search and results interface end to end.' },
   },
   {
     name: 'Novra',
@@ -52,6 +68,9 @@ const projects = [
     liveUrl: 'https://thenovra.pxxl.click',
     githubUrl: 'https://github.com/FortuneNnah/Novra',
     label: 'Brand',
+    image: novraImg,
+    imageAlt: 'Novra furniture storefront home page',
+    highlight: { label: 'Role', text: 'Designed and built the storefront UI.' },
   },
   {
     name: 'EmpireBakes',
@@ -60,6 +79,9 @@ const projects = [
     liveUrl: 'https://empirebakes.pxxl.click',
     githubUrl: 'https://github.com/FortuneNnah/Empire-Bakes',
     label: 'Brand',
+    image: empirebakesImg,
+    imageAlt: 'EmpireBakes landing page with featured baked goods',
+    highlight: { label: 'Role', text: 'Built the responsive landing page in plain HTML, CSS, and JavaScript.' },
   },
   {
     name: 'Chapel of Praise',
@@ -68,6 +90,9 @@ const projects = [
     liveUrl: 'https://chapelofpraise.netlify.app',
     githubUrl: 'https://github.com/FortuneNnah/ChapelofPraise',
     label: 'Community',
+    image: chapelImg,
+    imageAlt: 'Chapel of Praise home page',
+    highlight: { label: 'Role', text: 'Built the site for events and sermons in React.' },
   },
   {
     name: 'AIM',
@@ -76,6 +101,9 @@ const projects = [
     liveUrl: 'https://aim-portfolio.netlify.app',
     githubUrl: 'https://github.com/FortuneNnah/AIM',
     label: 'Portfolio',
+    image: aimImg,
+    imageAlt: 'AIM portfolio home page',
+    highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
   },
 ];
 
@@ -129,16 +157,11 @@ const experience = [
   },
 ];
 
-const statItems = [
-  { value: '5+', label: 'Projects shipped' },
-  { value: '2+', label: 'Years experience' },
-  { value: '100%', label: 'Client-focused delivery' },
-];
-
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/FortuneNnah', icon: 'github' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com', icon: 'linkedin' },
-  { label: 'X', href: 'https://twitter.com/@_jhsFortune', icon: 'x' },
+  /* TODO: replace YOUR-HANDLE with your real LinkedIn profile name */
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/YOUR-HANDLE', icon: 'linkedin' },
+  { label: 'X', href: 'https://x.com/_jhsFortune', icon: 'x' },
 ];
 
 const IconGithub = () => (
@@ -190,6 +213,8 @@ function App() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
 
   useEffect(() => {
     observeElements();
@@ -214,7 +239,7 @@ function App() {
     return validationErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const nextErrors = validateForm();
 
@@ -225,8 +250,32 @@ function App() {
     }
 
     setErrors({});
-    setSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setSendError('');
+
+    /* Never claim success when nothing was sent */
+    if (!FORM_ENDPOINT) {
+      setSendError('The contact form is not connected yet. Please email me directly instead.');
+      return;
+    }
+
+    setSending(true);
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Request failed');
+
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch {
+      setSendError('Something went wrong sending your message. Please try again or email me directly.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -383,58 +432,13 @@ function App() {
               <h2>Projects built with practical thinking and modern UI standards.</h2>
             </div>
 
-            <div className="project-grid">
-              {projects.map((project) => (
-                <article key={project.name} className="project-card" data-scroll-reveal>
-                  <div className="project-visual" aria-hidden="true">
-                    <div className="mock-browser">
-                      <div className="browser-bar">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                      <div className="browser-content">
-                        <div className="browser-sidebar"></div>
-                        <div className="browser-main">
-                          <div className="browser-line browser-line-lg"></div>
-                          <div className="browser-line"></div>
-                          <div className="browser-grid">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <span className="project-badge">{project.label}</span>
-                  </div>
-
-                  <div className="project-body">
-                    <div className="project-header">
-                      <h3>{project.name}</h3>
-                      <span className="project-tag">{project.label}</span>
-                    </div>
-                    <p>{project.summary}</p>
-                    <div className="project-stack">
-                      {project.stack.map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </div>
-                    <div className="project-links">
-                      <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn btn-secondary btn-small">
-                        Live Demo
-                      </a>
-                      <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn btn-ghost btn-small">
-                        View Code
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <ProjectGrid projects={projects} />
           </div>
         </section>
 
+        {/* Restored: this section was missing, so the Experience nav link went nowhere.
+            Class names are best guesses; match them to your index.css or restore your
+            original markup from git (git diff src/App.jsx). */}
         <section id="experience" className="section-block section-surface">
           <div className="container">
             <div className="section-heading" data-scroll-reveal>
@@ -444,21 +448,23 @@ function App() {
 
             <div className="timeline">
               {experience.map((item) => (
-                <div key={`${item.role}-${item.company}`} className="timeline-item" data-scroll-reveal>
-                  <div className="timeline-dot" aria-hidden="true"></div>
-                  <div className="timeline-content">
-                    <div className="timeline-topline">
-                      <h3>{item.role}</h3>
-                      <span>{item.period}</span>
+                <article key={`${item.role}-${item.company}`} className="timeline-item" data-scroll-reveal>
+                  <span className="timeline-dot" aria-hidden="true"></span>
+                  <div className="timeline-card">
+                    <div className="timeline-header">
+                      <div>
+                        <h3>{item.role}</h3>
+                        <p className="timeline-company">{item.company}</p>
+                      </div>
+                      <span className="timeline-period">{item.period}</span>
                     </div>
-                    <p className="timeline-company">{item.company}</p>
                     <ul>
                       {item.achievements.map((achievement) => (
                         <li key={achievement}>{achievement}</li>
                       ))}
                     </ul>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
@@ -563,8 +569,14 @@ function App() {
                     {errors.message && <small>{errors.message}</small>}
                   </label>
 
-                  <button type="submit" className="btn btn-primary form-submit">
-                    Send Message
+                  {sendError && (
+                    <p className="form-error" role="alert">
+                      {sendError}
+                    </p>
+                  )}
+
+                  <button type="submit" className="btn btn-primary form-submit" disabled={sending}>
+                    {sending ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
               )}
@@ -573,9 +585,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }
