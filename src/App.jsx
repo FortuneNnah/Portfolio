@@ -6,7 +6,7 @@ import ProjectGrid from './Components/Projects';
 
 /* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
 import clipfindImg from './assets/projects/clipfind.png';
-import novraImg from './assets/projects/Nevora.png';
+import novraImg from './assets/projects/EonMotors.png';
 import empirebakesImg from './assets/projects/empirebakes.png';
 import chapelImg from './assets/projects/chapelofpraise.png';
 import aimImg from './assets/projects/AIM.png';
@@ -319,19 +319,20 @@ function App() {
         <section id="home" className="hero-section">
           <div className="container hero-layout">
             <div className="hero-copy" data-scroll-reveal>
-              <p className="eyebrow">Frontend Developer / React Native Developer</p>
-              <h1>Designing digital products that feel clear, useful, and genuinely considered.</h1>
+              <p className="eyebrow">Frontend development · Exploring mobile</p>
+              <h1>Thoughtful interfaces. <span className="hero-emphasis">Built to work.</span></h1>
               <p className="lead">
-                I’m Fortune Nnah, a frontend and mobile developer building thoughtful interfaces for products that need to work beautifully and perform reliably.
+                I’m Fortune Nnah, a frontend developer working my way into mobile development with React Native. I turn product ideas into clear, responsive experiences that are useful first and polished in the details.
               </p>
               <div className="cta-row">
                 <a href="#projects" className="btn btn-primary">
                   View Projects
                 </a>
                 <a href="#contact" className="btn btn-secondary">
-                  Contact Me
+                  Let’s talk
                 </a>
               </div>
+              <p className="hero-note"><span className="availability-dot" aria-hidden="true"></span> Lagos, Nigeria <span className="hero-note-divider">/</span> Open to select projects</p>
               <div className="social-row" aria-label="Social links">
                 {socialLinks.map((link) => (
                   <a
@@ -429,7 +430,8 @@ function App() {
           <div className="container">
             <div className="section-heading" data-scroll-reveal>
               <p className="eyebrow">Selected Work</p>
-              <h2>Projects built with practical thinking and modern UI standards.</h2>
+              <h2>A selection of things I’ve designed, built, and learned from.</h2>
+              <p className="section-intro">A mix of product interfaces, brand websites, and community-focused experiences. Each project starts with clarity and ends with the details.</p>
             </div>
 
             <ProjectGrid projects={projects} />
@@ -585,7 +587,9 @@ function App() {
         </section>
       </main>
 
-      <Footer />
+      <div className="footer-reveal" data-scroll-reveal>
+        <Footer />
+      </div>
     </div>
   );
 }
