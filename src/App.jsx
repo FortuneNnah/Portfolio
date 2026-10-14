@@ -5,10 +5,10 @@ import Footer from './Components/Footer';
 import ProjectGrid from './Components/Projects';
 
 /* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
-import clipfindImg from './assets/projects/clipfind.png';
+import clipfindImg from './assets/projects/ClipFind.png';
 import novraImg from './assets/projects/EonMotors.png';
-import empirebakesImg from './assets/projects/empirebakes.png';
-import chapelImg from './assets/projects/chapelofpraise.png';
+import empirebakesImg from './assets/projects/EmpireBakes.png';
+import chapelImg from './assets/projects/Chapelofpraise.png';
 import aimImg from './assets/projects/AIM.png';
 
 /* Where the contact form posts to. Add VITE_FORM_ENDPOINT to your .env
