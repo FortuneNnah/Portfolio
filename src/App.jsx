@@ -7,7 +7,7 @@ import ProjectGrid from './Components/Projects';
 /* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
 import clipfindImg from './assets/projects/ClipFind.png';
 import novraImg from './assets/projects/EonMotors.png';
-import empirebakesImg from './assets/projects/EmpireBakes.png';
+import empirebakesImg from './assets/projects/Empirebakes.png';
 import chapelImg from './assets/projects/Chapelofpraise.png';
 import aimImg from './assets/projects/AIM.png';
 
