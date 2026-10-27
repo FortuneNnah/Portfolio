@@ -3,6 +3,7 @@ import portrait from './Imgs/Meeeeeeeeee.jpeg';
 import { observeElements } from './utils/scrollReveal';
 import Footer from './Components/Footer';
 import ProjectGrid from './Components/Projects';
+import BounceText from './Components/BounceText';
 
 /* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
 import clipfindImg from './assets/projects/ClipFind.png';
@@ -25,27 +26,15 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ];
 
+/* Words that scroll across the tilted band under the hero */
+const tickerItems = ['React', 'React Native', 'Expo', 'TypeScript', 'Responsive UI', 'Figma', 'Firebase', 'Supabase', 'REST APIs'];
+
 const skillGroups = [
-  {
-    title: 'Frontend',
-    items: ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript', 'Responsive UI'],
-  },
-  {
-    title: 'Mobile Development',
-    items: ['React Native', 'Expo', 'Navigation', 'Mobile UI', 'App flows', 'Performance'],
-  },
-  {
-    title: 'Languages',
-    items: ['JavaScript', 'TypeScript', 'Java', 'SQL'],
-  },
-  {
-    title: 'Tools',
-    items: ['Git', 'GitHub', 'VS Code', 'Figma', 'Postman', 'Firebase'],
-  },
-  {
-    title: 'Data',
-    items: ['SQLite', 'Firestore', 'Supabase', 'REST APIs'],
-  },
+  { title: 'Frontend', items: ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript', 'Responsive UI'] },
+  { title: 'Mobile Development', items: ['React Native', 'Expo', 'Navigation', 'Mobile UI', 'App flows', 'Performance'] },
+  { title: 'Languages', items: ['JavaScript', 'TypeScript', 'Java', 'SQL'] },
+  { title: 'Tools', items: ['Git', 'GitHub', 'VS Code', 'Figma', 'Postman', 'Firebase'] },
+  { title: 'Data', items: ['SQLite', 'Firestore', 'Supabase', 'REST APIs'] },
 ];
 
 /* NOTE: the highlight lines are drafts. Edit them to match your real role or results. */
@@ -108,30 +97,12 @@ const projects = [
 ];
 
 const services = [
-  {
-    title: 'Website Development',
-    description: 'End-to-end website builds designed for clarity, speed, and long-term maintainability.',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'Responsive, reusable interfaces built with modern React patterns and thoughtful UX decisions.',
-  },
-  {
-    title: 'Responsive Web Design',
-    description: 'Layouts and interactions crafted to perform smoothly across desktop, tablet, and mobile devices.',
-  },
-  {
-    title: 'Web Application Development',
-    description: 'Custom product interfaces and feature-rich web experiences that align with business goals.',
-  },
-  {
-    title: 'API Integration',
-    description: 'Clean integration with external services, real data sources, and custom application workflows.',
-  },
-  {
-    title: 'Website Maintenance',
-    description: 'Ongoing support for updates, improvements, performance tuning, and feature refinement.',
-  },
+  { title: 'Website Development', description: 'End-to-end website builds designed for clarity, speed, and long-term maintainability.' },
+  { title: 'Frontend Development', description: 'Responsive, reusable interfaces built with modern React patterns and thoughtful UX decisions.' },
+  { title: 'Responsive Web Design', description: 'Layouts and interactions crafted to perform smoothly across desktop, tablet, and mobile devices.' },
+  { title: 'Web Application Development', description: 'Custom product interfaces and feature-rich web experiences that align with business goals.' },
+  { title: 'API Integration', description: 'Clean integration with external services, real data sources, and custom application workflows.' },
+  { title: 'Website Maintenance', description: 'Ongoing support for updates, improvements, performance tuning, and feature refinement.' },
 ];
 
 const experience = [
@@ -202,10 +173,17 @@ const IconLocation = () => (
   </svg>
 );
 
-const IconArrow = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+/* Social icon row, reused in the hero and the contact section */
+const SocialLinks = ({ label, compact = false }) => (
+  <div className={`social-row ${compact ? 'social-row-compact' : ''}`} aria-label={label}>
+    {socialLinks.map((link) => (
+      <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="social-link" aria-label={link.label}>
+        {link.icon === 'github' && <IconGithub />}
+        {link.icon === 'linkedin' && <IconLinkedin />}
+        {link.icon === 'x' && <IconX />}
+      </a>
+    ))}
+  </div>
 );
 
 function App() {
@@ -318,56 +296,56 @@ function App() {
       <main>
         <section id="home" className="hero-section">
           <div className="container hero-layout">
-            <div className="hero-copy" data-scroll-reveal>
-              <p className="eyebrow">Frontend development · Exploring mobile</p>
-              <h1>Thoughtful interfaces. <span className="hero-emphasis">Built to work.</span></h1>
-              <p className="lead">
+            <div className="hero-copy">
+              <span className="status-chip">
+                <span className="availability-dot" aria-hidden="true"></span>
+                Open to select projects
+              </span>
+
+              {/* Letters spring in one by one; hover a letter to make it jump */}
+              <h1>
+                <BounceText className="line" text="Thoughtful interfaces." />
+                <BounceText className="line" text="Built to work." delay={650} />
+              </h1>
+
+              <p className="lead" data-scroll-reveal>
                 I’m Fortune Nnah, a frontend developer working my way into mobile development with React Native. I turn product ideas into clear, responsive experiences that are useful first and polished in the details.
               </p>
-              <div className="cta-row">
-                <a href="#projects" className="btn btn-primary">
-                  View Projects
-                </a>
-                <a href="#contact" className="btn btn-secondary">
-                  Let’s talk
-                </a>
+              <div className="cta-row" data-scroll-reveal>
+                <a href="#projects" className="btn btn-primary">View Projects</a>
+                <a href="#contact" className="btn btn-secondary">Let’s talk</a>
               </div>
-              <p className="hero-note"><span className="availability-dot" aria-hidden="true"></span> Lagos, Nigeria <span className="hero-note-divider">/</span> Open to select projects</p>
-              <div className="social-row" aria-label="Social links">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="social-link"
-                    aria-label={link.label}
-                  >
-                    {link.icon === 'github' && <IconGithub />}
-                    {link.icon === 'linkedin' && <IconLinkedin />}
-                    {link.icon === 'x' && <IconX />}
-                  </a>
-                ))}
+              <div data-scroll-reveal>
+                <SocialLinks label="Social links" />
               </div>
             </div>
 
             <div className="hero-visual" data-scroll-reveal>
-              <div className="portrait-card">
+              <span className="blob blob-a" aria-hidden="true"></span>
+              <span className="blob blob-b" aria-hidden="true"></span>
+              <div className="portrait-frame">
                 <img src={portrait} alt="Portrait of Fortune Nnah" />
-                <div className="presence-card">
-                  <span className="presence-label">Available for freelance work</span>
-                  <strong>Open to select projects</strong>
-                </div>
               </div>
+              <span className="float-chip chip-a" aria-hidden="true">React</span>
+              <span className="float-chip chip-b" aria-hidden="true">React Native</span>
+              <span className="float-chip chip-c" aria-hidden="true">Lagos, Nigeria</span>
             </div>
           </div>
         </section>
 
+        {/* Tilted ticker. The list is doubled so the loop never shows a gap. */}
+        <div className="marquee" aria-hidden="true">
+          <div className="marquee-track">
+            {[...tickerItems, ...tickerItems].map((item, index) => (
+              <span key={`${item}-${index}`} className="marquee-item">{item}</span>
+            ))}
+          </div>
+        </div>
+
         <section id="about" className="section-block">
           <div className="container">
-            <div className="section-heading" data-scroll-reveal>
-              <p className="eyebrow">About Me</p>
-              <h2>Thoughtful interfaces, built with care and real product thinking.</h2>
+            <div className="section-heading">
+              <BounceText as="h2" text="Thoughtful interfaces, built with care and real product thinking." />
             </div>
 
             <div className="about-grid">
@@ -380,16 +358,16 @@ function App() {
                 </p>
               </div>
 
-              <div className="about-highlights" data-scroll-reveal>
-                <div className="highlight-item">
+              <div className="about-highlights">
+                <div className="highlight-item" data-scroll-reveal>
                   <strong>Frontend-first thinking</strong>
                   <span>Clean UI systems, responsive layouts, and practical product decisions.</span>
                 </div>
-                <div className="highlight-item">
+                <div className="highlight-item" data-scroll-reveal>
                   <strong>Mobile product focus</strong>
                   <span>App flows and experiences designed to feel intuitive on smaller screens.</span>
                 </div>
-                <div className="highlight-item">
+                <div className="highlight-item" data-scroll-reveal>
                   <strong>Useful execution</strong>
                   <span>Readable code, clear structure, and interface choices that support the work.</span>
                 </div>
@@ -400,9 +378,8 @@ function App() {
 
         <section id="skills" className="section-block section-surface">
           <div className="container">
-            <div className="section-heading" data-scroll-reveal>
-              <p className="eyebrow">Skills</p>
-              <h2>Core tools and technologies I work with.</h2>
+            <div className="section-heading">
+              <BounceText as="h2" text="Core tools and technologies I work with." />
             </div>
 
             <div className="skill-grid">
@@ -415,9 +392,7 @@ function App() {
                   <h3>{group.title}</h3>
                   <div className="skill-list">
                     {group.items.map((item) => (
-                      <span key={item} className="skill-pill">
-                        {item}
-                      </span>
+                      <span key={item} className="skill-pill">{item}</span>
                     ))}
                   </div>
                 </div>
@@ -428,24 +403,21 @@ function App() {
 
         <section id="projects" className="section-block">
           <div className="container">
-            <div className="section-heading" data-scroll-reveal>
-              <p className="eyebrow">Selected Work</p>
-              <h2>A selection of things I’ve designed, built, and learned from.</h2>
-              <p className="section-intro">A mix of product interfaces, brand websites, and community-focused experiences. Each project starts with clarity and ends with the details.</p>
+            <div className="section-heading">
+              <BounceText as="h2" text="A selection of things I’ve designed, built, and learned from." />
+              <p className="section-intro" data-scroll-reveal>
+                A mix of product interfaces, brand websites, and community-focused experiences. Scroll to stack them up, hover a window to open it.
+              </p>
             </div>
 
             <ProjectGrid projects={projects} />
           </div>
         </section>
 
-        {/* Restored: this section was missing, so the Experience nav link went nowhere.
-            Class names are best guesses; match them to your index.css or restore your
-            original markup from git (git diff src/App.jsx). */}
         <section id="experience" className="section-block section-surface">
           <div className="container">
-            <div className="section-heading" data-scroll-reveal>
-              <p className="eyebrow">Experience</p>
-              <h2>Technical experience shaped by problem-solving and delivery.</h2>
+            <div className="section-heading">
+              <BounceText as="h2" text="Technical experience shaped by problem-solving and delivery." />
             </div>
 
             <div className="timeline">
@@ -474,35 +446,30 @@ function App() {
 
         <section id="services" className="section-block">
           <div className="container">
-            <div className="section-heading" data-scroll-reveal>
-              <p className="eyebrow">Services</p>
-              <h2>Support for product teams, founders, and growing businesses.</h2>
+            <div className="section-heading">
+              <BounceText as="h2" text="Support for product teams, founders, and growing businesses." />
             </div>
 
-            <div className="service-grid">
+            <ul className="service-list">
               {services.map((service) => (
-                <article key={service.title} className="service-card" data-scroll-reveal>
-                  <div className="service-icon" aria-hidden="true">
-                    <IconArrow />
-                  </div>
-                  <h3>{service.title}</h3>
+                <li key={service.title} className="service-row">
+                  <BounceText as="h3" text={service.title} />
                   <p>{service.description}</p>
-                </article>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
 
         <section id="contact" className="section-block section-surface">
           <div className="container contact-layout">
-            <div className="contact-panel" data-scroll-reveal>
-              <p className="eyebrow">Contact</p>
-              <h2>Let’s build something effective.</h2>
-              <p className="contact-copy">
+            <div className="contact-panel">
+              <BounceText as="h2" text="Let’s build something effective." />
+              <p className="contact-copy" data-scroll-reveal>
                 Whether you need a polished landing page, a responsive web app, or a frontend refresh, I’d be glad to hear about your project.
               </p>
 
-              <div className="contact-list">
+              <div className="contact-list" data-scroll-reveal>
                 <a href="mailto:fortunennah7474@email.com">
                   <span className="contact-icon"><IconMail /></span>
                   <span>fortunennah7474@email.com</span>
@@ -517,21 +484,8 @@ function App() {
                 </div>
               </div>
 
-              <div className="social-row social-row-compact" aria-label="Contact social links">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="social-link"
-                    aria-label={link.label}
-                  >
-                    {link.icon === 'github' && <IconGithub />}
-                    {link.icon === 'linkedin' && <IconLinkedin />}
-                    {link.icon === 'x' && <IconX />}
-                  </a>
-                ))}
+              <div data-scroll-reveal>
+                <SocialLinks label="Contact social links" compact />
               </div>
             </div>
 
@@ -572,9 +526,7 @@ function App() {
                   </label>
 
                   {sendError && (
-                    <p className="form-error" role="alert">
-                      {sendError}
-                    </p>
+                    <p className="form-error" role="alert">{sendError}</p>
                   )}
 
                   <button type="submit" className="btn btn-primary form-submit" disabled={sending}>
