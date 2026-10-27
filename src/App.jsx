@@ -329,6 +329,8 @@ function App() {
               <span className="float-chip chip-a" aria-hidden="true">React</span>
               <span className="float-chip chip-b" aria-hidden="true">React Native</span>
               <span className="float-chip chip-c" aria-hidden="true">Lagos, Nigeria</span>
+              <span className="float-chip chip-d" aria-hidden="true">GitHub</span>
+              <span className="float-chip chip-e" aria-hidden="true">Git</span>
             </div>
           </div>
         </section>
