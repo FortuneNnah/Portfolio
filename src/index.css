@@ -267,11 +267,7 @@ h1, h2, h3 {
   background: #f8cfe0;
   box-shadow: 0 30px 50px -30px rgba(35, 41, 70, 0.5);
 }
-.portrait-frame img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  object-position: center 28%; }
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
 
 .float-chip {
   position: absolute;
@@ -287,8 +283,6 @@ h1, h2, h3 {
 .chip-a { top: 12%; left: -9%; }
 .chip-b { top: 46%; right: -9%; background: #f7e8a6; animation-delay: -1.5s; }
 .chip-c { bottom: 9%; left: -5%; background: #c4e0f7; animation-delay: -3s; }
-.chip-d { bottom: 9%; right: -5%; background: #c4e0f7; animation-delay: -2s; }
-.chip-e { top: 15%; right: -1%; background: #c4e0f7; animation-delay: -2s; }
 
 /* ---------- 8. Skills ticker (tilted band between hero and about) ---------- */
 .marquee {
@@ -378,9 +372,9 @@ h1, h2, h3 {
   position: sticky;
   top: calc(6rem + var(--lift, 0) * 1rem);
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
   align-items: center;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
   min-height: min(34rem, calc(100vh - 9rem));
   margin-bottom: 2.5rem;
   padding: clamp(1.5rem, 4vw, 3.2rem);
@@ -461,7 +455,15 @@ h1, h2, h3 {
   white-space: nowrap;
 }
 
-.stage-window img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; }
+/* Always a landscape frame; "contain" shows the whole screenshot with no cropping */
+.stage-window img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  object-position: center;
+  background: #f3f4fb;
+}
 
 /* ---------- 12. Experience ---------- */
 .timeline { display: grid; gap: 1.2rem; max-width: 940px; }

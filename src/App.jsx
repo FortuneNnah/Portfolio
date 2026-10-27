@@ -11,6 +11,7 @@ import novraImg from './assets/projects/EonMotors.png';
 import empirebakesImg from './assets/projects/Empirebakes.png';
 import chapelImg from './assets/projects/Chapelofpraise.png';
 import aimImg from './assets/projects/AIM.png';
+import BloodbridgeImg from './assets/projects/Bloodbridge.png'
 
 /* Where the contact form posts to. Add VITE_FORM_ENDPOINT to your .env
    (for example a Formspree URL like https://formspree.io/f/xxxxxxxx). */
@@ -51,26 +52,15 @@ const projects = [
     highlight: { label: 'Role', text: 'Built the search and results interface end to end.' },
   },
   {
-    name: 'Novra',
+    name: 'EonMotors',
     summary: 'Premium furniture storefront with a focused product story, strong visual rhythm, and a clean browsing experience.',
     stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://thenovra.pxxl.click',
+    liveUrl: 'https://akaffiliate.netlify.app',
     githubUrl: 'https://github.com/FortuneNnah/Novra',
     label: 'Brand',
     image: novraImg,
     imageAlt: 'Novra furniture storefront home page',
     highlight: { label: 'Role', text: 'Designed and built the storefront UI.' },
-  },
-  {
-    name: 'EmpireBakes',
-    summary: 'Food brand landing page built around elegant product presentation, simple navigation, and a polished customer journey.',
-    stack: ['HTML5', 'CSS3', 'JavaScript'],
-    liveUrl: 'https://empirebakes.pxxl.click',
-    githubUrl: 'https://github.com/FortuneNnah/Empire-Bakes',
-    label: 'Brand',
-    image: empirebakesImg,
-    imageAlt: 'EmpireBakes landing page with featured baked goods',
-    highlight: { label: 'Role', text: 'Built the responsive landing page in plain HTML, CSS, and JavaScript.' },
   },
   {
     name: 'Chapel of Praise',
@@ -91,6 +81,17 @@ const projects = [
     githubUrl: 'https://github.com/FortuneNnah/AIM',
     label: 'Portfolio',
     image: aimImg,
+    imageAlt: 'AIM portfolio home page',
+    highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
+  },
+  {
+    name: 'BloodBridge',
+    summary: 'Minimal portfolio experience for showcasing work with a clean editorial layout and storytelling-first presentation.',
+    stack: ['React', 'Vite', 'CSS3'],
+    liveUrl: 'https://bloodbridge-frontend.pxxlspace.cv',
+    githubUrl: 'https://github.com/FortuneNnah/AIM',
+    label: 'Portfolio',
+    image: BloodbridgeImg,
     imageAlt: 'AIM portfolio home page',
     highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
   },
