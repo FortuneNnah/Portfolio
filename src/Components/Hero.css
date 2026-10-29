@@ -1,0 +1,290 @@
+/* =====================================================================
+   HERO - editorial collage poster
+   Plain hex colors, no root variables.
+
+   Paper #e4e0d6 / light paper #f1ede3 / Ink #111111
+   Cobalt #1d3fd0 / Lime #c6f135
+   Fonts: Abril Fatface (headline), Caveat (handwriting), Figtree (body)
+
+   Every entrance animation uses "backwards" fill so the resting style
+   (and hover styles) stay in charge once the animation ends.
+   ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@500;700&display=swap");
+
+/* ---------- 1. Poster canvas ---------- */
+.poster {
+  position: relative;
+  /* Pull the poster up behind the floating nav pill */
+  margin-top: -4.8rem;
+  padding: calc(4.8rem + clamp(2rem, 4vw, 3.5rem)) 0 clamp(3rem, 5vw, 5rem);
+  overflow: hidden;
+  background: #e4e0d6;
+  color: #111;
+}
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+}
+
+.poster-main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* ---------- 2. Small captions and handwriting ---------- */
+.poster-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; }
+
+.poster-cap,
+.p-cap-right {
+  margin: 0;
+  font: 700 0.68rem/1.6 "Figtree", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.poster-cap::after { display: block; width: 1.2rem; height: 2px; margin-top: 0.5rem; background: #111; content: ""; }
+
+.poster-oval {
+  position: relative;
+  margin: 0.2rem 1.5rem 0 0;
+  padding: 1.1rem 2rem;
+  font: 500 1.3rem/1.15 "Caveat", cursive;
+  text-align: center;
+  transform: rotate(-4deg);
+}
+.poster-oval svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.poster-oval ellipse { fill: none; stroke: #111; stroke-width: 1.4; stroke-dasharray: 1; vector-effect: non-scaling-stroke; animation: draw 1.4s 1s ease-out backwards; }
+
+/* Handwriting "writes itself" left to right */
+.p-write { display: inline-block; animation: write 1.3s 1.2s ease-out backwards; }
+
+/* ---------- 3. Headline ---------- */
+.poster-title-wrap { position: relative; }
+
+.poster-title {
+  color: #111;
+  font-family: "Abril Fatface", "Bricolage Grotesque", serif;
+  font-size: clamp(3rem, 7.2vw, 6.8rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+.poster-blue { color: #1d3fd0; }
+.poster .bounce-char:hover { color: #1d3fd0; }
+.poster .poster-blue .bounce-char:hover { color: #111; }
+
+/* Four-point sparkles */
+.p-spark { position: absolute; width: 2.2rem; height: 2.2rem; fill: #1d3fd0; animation: spin 14s linear infinite; }
+.p-spark-a { top: 6%; right: 4%; }
+.p-spark-b { z-index: 5; bottom: 30%; left: -1rem; width: 1.8rem; height: 1.8rem; fill: #111; animation-direction: reverse; }
+
+/* ---------- 4. Notes + intro card ---------- */
+.poster-lower { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 1.5rem; }
+
+.poster-notes { margin: 0; padding: 0; font: 500 1.35rem/1.3 "Caveat", cursive; list-style: none; }
+.poster-notes li::before { margin-right: 0.35rem; content: "-"; }
+
+.poster-lead {
+  position: relative;
+  isolation: isolate;
+  padding: 1.5rem 1.5rem 1.7rem;
+  filter: drop-shadow(0 12px 14px rgba(17, 17, 17, 0.18));
+  transform: rotate(0.8deg);
+  animation: pop-in 800ms 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+/* Torn-paper backing, drawn as its own layer so the tape is not clipped */
+.poster-lead::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #f1ede3;
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 95% 97%, 90% 94%, 84% 98%, 78% 94.5%, 72% 97.5%, 66% 94%, 60% 98%, 53% 94.5%, 47% 97.5%, 40% 94%, 33% 98%, 26% 94.5%, 19% 97.5%, 12% 94%, 6% 97%, 0 94.5%);
+  content: "";
+}
+.poster-lead p { margin: 0 0 1.1rem; color: #2a2a2a; font-size: 0.97rem; line-height: 1.7; }
+
+.tape { position: absolute; top: -0.7rem; left: 1.1rem; width: 5rem; height: 1.5rem; background: #c6f135; opacity: 0.92; transform: rotate(-6deg); }
+
+.poster-cta { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+.p-btn {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid #111;
+  background: #111;
+  color: #f1ede3;
+  font: 700 0.88rem "Figtree", sans-serif;
+  transition: transform 350ms cubic-bezier(0.34, 1.8, 0.5, 1), box-shadow 250ms ease, background-color 200ms, color 200ms;
+}
+.p-btn:hover, .p-btn:focus-visible { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #1d3fd0; }
+.p-btn:active { transform: translate(0, 0); box-shadow: none; }
+.p-btn-line { background: transparent; color: #111; }
+
+/* Social icons restyled to match the poster */
+.poster .social-row { margin-top: 1.1rem; }
+.poster .social-link { width: 2.5rem; height: 2.5rem; border: 2px solid #111; border-radius: 0; background: transparent; color: #111; }
+.poster .social-link:hover, .poster .social-link:focus-visible { border-color: #1d3fd0; background: #1d3fd0; color: #fff; }
+
+/* ---------- 5. The collage (right side) ---------- */
+.poster-visual { position: relative; z-index: 1; padding: 1.6rem 0 5.5rem; }
+
+.p-cap-right { position: absolute; top: 0; right: 0; display: flex; align-items: center; gap: 0.5rem; }
+
+/* Cobalt block behind the photo */
+.p-block {
+  position: absolute;
+  top: 7%;
+  right: 0;
+  z-index: 0;
+  width: 76%;
+  height: 78%;
+  background: #1d3fd0;
+  transform-origin: right center;
+  animation: block-in 900ms 150ms cubic-bezier(0.34, 1.3, 0.64, 1) backwards;
+}
+
+/* Lime circle peeking out from behind the photo */
+.p-sun {
+  position: absolute;
+  top: 38%;
+  right: -3%;
+  z-index: 1;
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c6f135;
+  animation: pop-in 900ms 500ms cubic-bezier(0.34, 1.8, 0.5, 1) backwards;
+}
+
+/* Photo + doodles. The wrap is not clipped, so the crown can sit above the photo. */
+.p-photo-wrap {
+  position: relative;
+  z-index: 3;
+  width: 74%;
+  margin-left: 6%;
+  transform: rotate(-2deg);
+  transition: transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: photo-drop 1100ms 300ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+.p-photo-wrap:hover { transform: rotate(1deg) scale(1.03); }
+
+/* Torn paper edge along the bottom, black and white photo inside */
+.p-photo {
+  margin: 0;
+  padding: 10px 10px 30px;
+  background: #f1ede3;
+  filter: drop-shadow(0 18px 18px rgba(17, 17, 17, 0.3));
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 96% 94.5%, 92% 91.8%, 87% 95.2%, 82% 92.2%, 76% 96%, 70% 93%, 64% 95.5%, 58% 92%, 52% 95%, 46% 92.5%, 40% 95.5%, 34% 92.5%, 28% 95%, 22% 92%, 16% 95.5%, 10% 93%, 5% 95%, 0 92.5%);
+}
+.p-photo img { width: 100%; height: auto; filter: grayscale(1) contrast(1.12) brightness(1.05); }
+
+/* Lime crown doodle, sitting on his head */
+.p-crown {
+  position: absolute;
+  top: 3%;
+  left: 34%;
+  z-index: 4;
+  width: 36%;
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: #c6f135;
+  stroke-width: 2.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transform: rotate(8deg);
+  animation: crown-pop 800ms 1.3s cubic-bezier(0.34, 1.8, 0.5, 1) backwards, crown-wobble 3.6s 2.4s ease-in-out infinite alternate;
+}
+.p-crown circle { fill: #c6f135; stroke: none; }
+.p-crown path { stroke-dasharray: 1; animation: draw 900ms 1.4s ease-out backwards; }
+
+/* Black scribble that runs off the photo onto the lime circle */
+.p-scribble {
+  position: absolute;
+  top: 50%;
+  right: -36%;
+  z-index: 4;
+  width: 68%;
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: #111;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.p-scribble path { stroke-dasharray: 1; animation: draw 1.4s 1.7s ease-out backwards; }
+
+/* Barcode made from stripes */
+.p-barcode {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0;
+  width: 3.6rem;
+  height: 4.2rem;
+  background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 13px);
+}
+
+/* Cobalt call-to-action block */
+.p-keep {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  width: 62%;
+  min-height: 7rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.3rem 1.5rem 1rem 1.8rem;
+  background: #1d3fd0;
+  color: #f1ede3;
+  transition: transform 450ms cubic-bezier(0.34, 1.8, 0.5, 1);
+  animation: block-in 900ms 700ms cubic-bezier(0.34, 1.3, 0.64, 1) backwards;
+}
+.p-keep:hover, .p-keep:focus-visible { transform: translate(-4px, -4px) rotate(-1deg); }
+.p-keep .p-write { font: 500 2.5rem/1 "Caveat", cursive; transform: rotate(-6deg); animation-delay: 1.8s; }
+.p-keep svg { width: 2.4rem; height: 2.4rem; flex: none; fill: none; stroke: #c6f135; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; animation: nudge 1.4s ease-in-out infinite alternate; }
+
+/* ---------- 6. Keyframes ---------- */
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -2% 0 0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.4) rotate(-12deg); } to { opacity: 1; } }
+@keyframes block-in { from { opacity: 0; transform: translateX(60px) scaleX(0.8); } to { opacity: 1; } }
+@keyframes photo-drop {
+  from { opacity: 0; transform: translateY(-80px) rotate(-9deg) scale(0.9); }
+  to { opacity: 1; }
+}
+@keyframes crown-pop { from { opacity: 0; transform: translateY(-34px) rotate(-30deg) scale(0.4); } to { opacity: 1; } }
+@keyframes crown-wobble { from { transform: rotate(6deg); } to { transform: rotate(11deg) translateY(-3px); } }
+@keyframes nudge { to { transform: translateX(8px); } }
+
+/* ---------- 7. Responsive ---------- */
+@media (max-width: 900px) {
+  .poster-grid { display: flex; flex-direction: column; gap: 2.2rem; }
+
+  /* Let the left column's pieces be re-ordered around the collage */
+  .poster-main { display: contents; }
+  .poster-top { order: 1; }
+  .poster-title-wrap { order: 2; }
+  .poster-visual { order: 3; width: min(100%, 460px); margin-inline: auto; }
+  .poster-lower { order: 4; grid-template-columns: minmax(0, 1fr); }
+  .poster-title { font-size: clamp(3rem, 14vw, 5.6rem); }
+}
+
+@media (max-width: 480px) {
+  .poster-oval { display: none; }
+  .p-keep .p-write { font-size: 2rem; }
+  .p-keep { min-height: 6rem; }
+  .poster-visual { padding-bottom: 4.6rem; }
+}

@@ -1,168 +1,123 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import './Hero.css';
+import BounceText from './BounceText';
 
-const IconMenu = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="3" y1="6" x2="21" y2="6" />
-    <line x1="3" y1="12" x2="21" y2="12" />
-    <line x1="3" y1="18" x2="21" y2="18" />
-  </svg>
-);
+import portrait from '../assets/projects/me.jpg';
 
-const IconClose = () => (  
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-);
+/* About.jsx and Contact.jsx import { Header } from "./Hero", so keep that working */
+export { default as Header } from './Header';
 
-export const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+/* Hero - editorial collage poster
+   Layout idea taken from the reference: big serif headline, torn-paper photo
+   on a cobalt block, lime circle, handwritten notes, tape, barcode, sparkles.
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location]);
-
-  const isActive = (path) => location.pathname === path;
-
+   Props
+   - socials  the social icon row (App.jsx passes <SocialLinks />) */
+export default function Hero({ socials }) {
   return (
-    <header className="header">
-      <nav className="navbar">
-        <Link to="/" className="logo">
-          &lt;/&gt;
-        </Link>
-        <button
-          className="mobile-menu-btn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <IconClose /> : <IconMenu />}
-        </button>
-        <ul className={`nav-links ${mobileMenuOpen ? "nav-links--open" : ""}`}>
-          <li>
-            <Link
-              to="/"
-              className={isActive("/") ? "nav-link--active" : ""}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              className={isActive("/about") ? "nav-link--active" : ""}
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/projects"
-              className={isActive("/projects") ? "nav-link--active" : ""}
-            >
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              className={isActive("/contact") ? "nav-link--active" : ""}
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
-};
+    <section id="home" className="poster">
+      <div className="container poster-grid">
+        {/* ---------- Left: words ---------- */}
+        <div className="poster-main">
+          <div className="poster-top">
+            <p className="poster-cap">
+              Frontend developer<br />
+              React Native<br />
+              Lagos, Nigeria
+            </p>
 
-const HeroSection = () => {
-  return (
-    <section className="home-hero">
-      <div className="hero-shell">
-        <div className="hero-content">
-          <div className="avail">
-            <div className="circle"></div>
-            <p className="avail-txt">available for freelance</p>
+            {/* Handwritten note inside a hand-drawn oval */}
+            <p className="poster-oval">
+              <svg viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
+                <ellipse cx="100" cy="45" rx="96" ry="40" pathLength="1" />
+              </svg>
+              <span className="p-write">Clean code,<br />calm interfaces.</span>
+            </p>
           </div>
-          <p className="hero-kicker">Frontend Web Developer</p>
-          <h1>Hi, I'm Fortune Nnah.</h1>
-          <p className="hero-intro">
-            I build polished, conversion-focused web experiences with clean code,
-            thoughtful interaction, and a strong eye for detail.
-          </p>
-          <div className="hero-cta">
-            <Link to="/projects" className="cta-button primary">
-              View My Work
-            </Link>
-            <Link to="/contact" className="cta-button secondary">
-              Get In Touch
-            </Link>
+
+          <div className="poster-title-wrap">
+            <h1 className="poster-title">
+              <BounceText className="line" text="Thoughtful" />
+              <BounceText className="line" text="Interfaces." delay={450} />
+              <BounceText className="line poster-blue" text="Built to" delay={900} />
+              <BounceText className="line" text="Work." delay={1200} />
+            </h1>
+
+            <svg className="p-spark p-spark-a" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0C12 6 18 12 24 12C18 12 12 18 12 24C12 18 6 12 0 12C6 12 12 6 12 0Z" />
+            </svg>
           </div>
-          <div className="hero-metrics">
-            <div className="hero-metric">
-              <strong>10+</strong>
-              <span>Projects delivered</span>
-            </div>
-            <div className="hero-metric">
-              <strong>2+</strong>
-              <span>Years of experience</span>
-            </div>
-            <div className="hero-metric">
-              <strong>100%</strong>
-              <span>Client satisfaction</span>
+
+          <div className="poster-lower">
+            <ul className="poster-notes p-write" aria-label="What I focus on">
+              <li>React &amp; React Native</li>
+              <li>Clear, calm UI</li>
+              <li>Responsive by default</li>
+              <li>Details that hold up</li>
+            </ul>
+
+            <div className="poster-lead">
+              <span className="tape" aria-hidden="true"></span>
+              <p>
+                I’m Fortune Nnah, a frontend developer working my way into mobile development with React Native. I turn product ideas into clear, responsive experiences that are useful first and polished in the details.
+              </p>
+              <div className="poster-cta">
+                <a href="#projects" className="p-btn">View Projects</a>
+                <a href="#contact" className="p-btn p-btn-line">Let’s talk</a>
+              </div>
+              {socials}
             </div>
           </div>
         </div>
 
-        <div className="hero-visual" aria-hidden="true">
-          <div className="visual-card">
-            <div className="visual-top">
-              <span className="chip chip-primary">React</span>
-              <span className="chip">Vite</span>
-              <span className="chip">UI Systems</span>
-            </div>
+        {/* ---------- Right: the collage ---------- */}
+        <div className="poster-visual">
+          <p className="p-cap-right">
+            <span className="availability-dot" aria-hidden="true"></span>
+            Open to select projects
+          </p>
 
-            <div className="visual-window">
-              <div className="window-bar">
-                <span className="window-dot dot-red"></span>
-                <span className="window-dot dot-yellow"></span>
-                <span className="window-dot dot-green"></span>
-              </div>
+          <span className="p-block" aria-hidden="true"></span>
+          <span className="p-sun" aria-hidden="true"></span>
 
-              <div className="window-body">
-                <div className="window-side">
-                  <div className="panel-block large"></div>
-                  <div className="panel-block"></div>
-                  <div className="panel-block"></div>
-                </div>
+          <div className="p-photo-wrap">
+            <figure className="p-photo">
+              <img
+                src={portrait}
+                alt="Portrait of Fortune Nnah in glasses and a black sweater"
+                width="851"
+                height="1280"
+                fetchpriority="high"
+              />
+            </figure>
 
-                <div className="window-main">
-                  <div className="main-card"></div>
-                  <div className="mini-row">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Doodles drawn over the photo */}
+            <svg className="p-crown" viewBox="0 0 64 40" aria-hidden="true">
+              <path d="M4 36 L9 9 L22 24 L32 4 L42 24 L55 9 L60 36 Z" pathLength="1" />
+              <circle cx="9" cy="8" r="2.4" />
+              <circle cx="32" cy="3" r="2.4" />
+              <circle cx="55" cy="8" r="2.4" />
+            </svg>
+
+            <svg className="p-scribble" viewBox="0 0 200 100" aria-hidden="true">
+              <path d="M4 82 C50 72 92 18 142 30 C176 38 152 72 120 62 C94 54 132 10 196 8" pathLength="1" />
+              <path d="M10 94 C70 70 130 62 190 48" pathLength="1" />
+            </svg>
           </div>
+
+          <span className="p-barcode" aria-hidden="true"></span>
+          <svg className="p-spark p-spark-b" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 0C12 6 18 12 24 12C18 12 12 18 12 24C12 18 6 12 0 12C6 12 12 6 12 0Z" />
+          </svg>
+
+          {/* Cobalt call-to-action block, like "Keep Going" in the reference */}
+          <a href="#contact" className="p-keep">
+            <span className="p-write">Let’s talk</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
   );
-};
-
-const Hero = () => {
-  return (
-    <>
-      <Header />
-      <HeroSection />
-    </>
-  );
-};
-
-export default Hero;
+}

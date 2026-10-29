@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import portrait from './Imgs/Meeeeeeeeee.jpeg';
 import { observeElements } from './utils/scrollReveal';
 import Footer from './Components/Footer';
 import ProjectGrid from './Components/Projects';
 import BounceText from './Components/BounceText';
+import Hero from './Components/Hero';
+import Header from './Components/Header';
 
 /* Project screenshots: put these files in src/assets/projects/ (1200 x 750 works best) */
 import clipfindImg from './assets/projects/ClipFind.png';
@@ -11,21 +12,10 @@ import novraImg from './assets/projects/EonMotors.png';
 import empirebakesImg from './assets/projects/Empirebakes.png';
 import chapelImg from './assets/projects/Chapelofpraise.png';
 import aimImg from './assets/projects/AIM.png';
-import BloodbridgeImg from './assets/projects/Bloodbridge.png'
 
 /* Where the contact form posts to. Add VITE_FORM_ENDPOINT to your .env
    (for example a Formspree URL like https://formspree.io/f/xxxxxxxx). */
 const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT;
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
-];
 
 /* Words that scroll across the tilted band under the hero */
 const tickerItems = ['React', 'React Native', 'Expo', 'TypeScript', 'Responsive UI', 'Figma', 'Firebase', 'Supabase', 'REST APIs'];
@@ -42,25 +32,36 @@ const skillGroups = [
 const projects = [
   {
     name: 'ClipFind',
-    summary: 'Movie discovery experience focused on quick search, clean browsing, and a better way to find titles from a short clip.',
+    summary: 'ClipFind helps anyone figure out which movie a scene comes from. Users upload a video clip or paste a link from social media, and the app returns the movie title, release year, director, genre, and poster. It solves the everyday problem of watching a clip online and not knowing what film it is.',
     stack: ['React', 'Vite', 'CSS3', 'API'],
     liveUrl: 'https://clipfind.netlify.app',
     githubUrl: 'https://github.com/FortuneNnah/ClipFInd',
     label: 'Product',
     image: clipfindImg,
     imageAlt: 'ClipFind search page showing movie results',
-    highlight: { label: 'Role', text: 'Built the search and results interface end to end.' },
+    highlight: { label: 'Role', text: 'Frontend Developer. I built the user interface and functionality end to end.' },
   },
   {
     name: 'EonMotors',
-    summary: 'Premium furniture storefront with a focused product story, strong visual rhythm, and a clean browsing experience.',
+    summary: 'Premium car leasing compnay.',
     stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://akaffiliate.netlify.app',
+    liveUrl: 'https://thenovra.pxxl.click',
     githubUrl: 'https://github.com/FortuneNnah/Novra',
     label: 'Brand',
     image: novraImg,
     imageAlt: 'Novra furniture storefront home page',
     highlight: { label: 'Role', text: 'Designed and built the storefront UI.' },
+  },
+  {
+    name: 'EmpireBakes',
+    summary: 'Food brand landing page built around elegant product presentation, simple navigation, and a polished customer journey.',
+    stack: ['HTML5', 'CSS3', 'JavaScript'],
+    liveUrl: 'https://empirebakes.pxxl.click',
+    githubUrl: 'https://github.com/FortuneNnah/Empire-Bakes',
+    label: 'Brand',
+    image: empirebakesImg,
+    imageAlt: 'EmpireBakes landing page with featured baked goods',
+    highlight: { label: 'Role', text: 'Built the responsive landing page in plain HTML, CSS, and JavaScript.' },
   },
   {
     name: 'Chapel of Praise',
@@ -84,24 +85,12 @@ const projects = [
     imageAlt: 'AIM portfolio home page',
     highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
   },
-  {
-    name: 'BloodBridge',
-    summary: 'Minimal portfolio experience for showcasing work with a clean editorial layout and storytelling-first presentation.',
-    stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://bloodbridge-frontend.pxxlspace.cv',
-    githubUrl: 'https://github.com/FortuneNnah/AIM',
-    label: 'Portfolio',
-    image: BloodbridgeImg,
-    imageAlt: 'AIM portfolio home page',
-    highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
-  },
 ];
 
 const services = [
   { title: 'Website Development', description: 'End-to-end website builds designed for clarity, speed, and long-term maintainability.' },
-  { title: 'Frontend Development', description: 'Responsive, reusable interfaces built with modern React patterns and thoughtful UX decisions.' },
+  {title: ' Mobile Development', description: 'I build user focused applications'},
   { title: 'Responsive Web Design', description: 'Layouts and interactions crafted to perform smoothly across desktop, tablet, and mobile devices.' },
-  { title: 'Web Application Development', description: 'Custom product interfaces and feature-rich web experiences that align with business goals.' },
   { title: 'API Integration', description: 'Clean integration with external services, real data sources, and custom application workflows.' },
   { title: 'Website Maintenance', description: 'Ongoing support for updates, improvements, performance tuning, and feature refinement.' },
 ];
@@ -188,7 +177,6 @@ const SocialLinks = ({ label, compact = false }) => (
 );
 
 function App() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -259,82 +247,10 @@ function App() {
 
   return (
     <div className="app-shell">
-      <header className="site-header">
-        <nav className="navbar container" aria-label="Main navigation">
-          <a href="#home" className="brand" aria-label="Fortune Nnah home">
-            <span className="brand-mark">&lt;/&gt;</span>
-            <span className="brand-name">Fortune Nnah</span>
-          </a>
-
-          <button
-            type="button"
-            className="nav-toggle"
-            onClick={() => setMobileNavOpen((current) => !current)}
-            aria-expanded={mobileNavOpen}
-            aria-controls="primary-navigation"
-            aria-label="Toggle navigation menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-          <div className={`nav-panel ${mobileNavOpen ? 'open' : ''}`} id="primary-navigation">
-            <div className="nav-links">
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href} onClick={() => setMobileNavOpen(false)}>
-                  {item.label}
-                </a>
-              ))}
-            </div>
-            <a href="#contact" className="btn btn-primary nav-cta" onClick={() => setMobileNavOpen(false)}>
-              Hire Me
-            </a>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main>
-        <section id="home" className="hero-section">
-          <div className="container hero-layout">
-            <div className="hero-copy">
-              <span className="status-chip">
-                <span className="availability-dot" aria-hidden="true"></span>
-                Open to select projects
-              </span>
-
-              {/* Letters spring in one by one; hover a letter to make it jump */}
-              <h1>
-                <BounceText className="line" text="Thoughtful interfaces." />
-                <BounceText className="line" text="Built to work." delay={650} />
-              </h1>
-
-              <p className="lead" data-scroll-reveal>
-                I’m Fortune Nnah, a frontend developer working my way into mobile development with React Native. I turn product ideas into clear, responsive experiences that are useful first and polished in the details.
-              </p>
-              <div className="cta-row" data-scroll-reveal>
-                <a href="#projects" className="btn btn-primary">View Projects</a>
-                <a href="#contact" className="btn btn-secondary">Let’s talk</a>
-              </div>
-              <div data-scroll-reveal>
-                <SocialLinks label="Social links" />
-              </div>
-            </div>
-
-            <div className="hero-visual" data-scroll-reveal>
-              <span className="blob blob-a" aria-hidden="true"></span>
-              <span className="blob blob-b" aria-hidden="true"></span>
-              <div className="portrait-frame">
-                <img src={portrait} alt="Portrait of Fortune Nnah" />
-              </div>
-              <span className="float-chip chip-a" aria-hidden="true">React</span>
-              <span className="float-chip chip-b" aria-hidden="true">React Native</span>
-              <span className="float-chip chip-c" aria-hidden="true">Lagos, Nigeria</span>
-              <span className="float-chip chip-d" aria-hidden="true">GitHub</span>
-              <span className="float-chip chip-e" aria-hidden="true">Git</span>
-            </div>
-          </div>
-        </section>
+        <Hero socials={<SocialLinks label="Social links" />} />
 
         {/* Tilted ticker. The list is doubled so the loop never shows a gap. */}
         <div className="marquee" aria-hidden="true">
@@ -348,6 +264,7 @@ function App() {
         <section id="about" className="section-block">
           <div className="container">
             <div className="section-heading">
+              <p className="sec-cap">About me</p>
               <BounceText as="h2" text="Thoughtful interfaces, built with care and real product thinking." />
             </div>
 
@@ -382,6 +299,7 @@ function App() {
         <section id="skills" className="section-block section-surface">
           <div className="container">
             <div className="section-heading">
+              <p className="sec-cap">Skills</p>
               <BounceText as="h2" text="Core tools and technologies I work with." />
             </div>
 
@@ -407,6 +325,7 @@ function App() {
         <section id="projects" className="section-block">
           <div className="container">
             <div className="section-heading">
+              <p className="sec-cap">Selected work</p>
               <BounceText as="h2" text="A selection of things I’ve designed, built, and learned from." />
               <p className="section-intro" data-scroll-reveal>
                 A mix of product interfaces, brand websites, and community-focused experiences. Scroll to stack them up, hover a window to open it.
@@ -420,6 +339,7 @@ function App() {
         <section id="experience" className="section-block section-surface">
           <div className="container">
             <div className="section-heading">
+              <p className="sec-cap">Experience</p>
               <BounceText as="h2" text="Technical experience shaped by problem-solving and delivery." />
             </div>
 
@@ -450,6 +370,7 @@ function App() {
         <section id="services" className="section-block">
           <div className="container">
             <div className="section-heading">
+              <p className="sec-cap">Services</p>
               <BounceText as="h2" text="Support for product teams, founders, and growing businesses." />
             </div>
 
@@ -464,9 +385,10 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section-block section-surface">
+        <section id="contact" className="section-block section-cobalt">
           <div className="container contact-layout">
             <div className="contact-panel">
+              <p className="sec-cap">Contact</p>
               <BounceText as="h2" text="Let’s build something effective." />
               <p className="contact-copy" data-scroll-reveal>
                 Whether you need a polished landing page, a responsive web app, or a frontend refresh, I’d be glad to hear about your project.

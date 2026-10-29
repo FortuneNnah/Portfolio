@@ -1,87 +1,43 @@
 import BounceText from './BounceText';
 
-/* One pastel per project panel (plain hex, matches the site palette):
-   lilac, peach, butter, mint, sky. They repeat if you add more projects. */
-const tints = ['#d4cbf5', '#ffd9bf', '#f7e8a6', '#bfe8d6', '#c4e0f7'];
-
-import clipfindImg from '../assets/projects/ClipFind.png';
-import novraImg from '../assets/projects/EonMotors.png';
-import empirebakesImg from '../assets/projects/Empirebakes.png';
-import chapelImg from '../assets/projects/Chapelofpraise.png';
-import aimImg from '../assets/projects/AIM.png';
-
-const projects = [
-  {
-    name: 'ClipFind',
-    summary: 'Movie discovery experience focused on quick search, clean browsing, and a better way to find titles from a short clip.',
-    stack: ['React', 'Vite', 'CSS3', 'API'],
-    liveUrl: 'https://clipfind.netlify.app',
-    githubUrl: 'https://github.com/FortuneNnah/ClipFInd',
-    label: 'Product',
-    image: clipfindImg,
-    imageAlt: 'ClipFind search page showing movie results',
-    highlight: { label: 'Role', text: 'Built the search and results interface end to end.' },
-  },
-  {
-    name: 'Novra',
-    summary: 'Premium furniture storefront with a focused product story, strong visual rhythm, and a clean browsing experience.',
-    stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://thenovra.pxxl.click',
-    githubUrl: 'https://github.com/FortuneNnah/Novra',
-    label: 'Brand',
-    image: novraImg,
-    imageAlt: 'Novra furniture storefront home page',
-    highlight: { label: 'Role', text: 'Designed and built the storefront UI.' },
-  },
-  {
-    name: 'EmpireBakes',
-    summary: 'Food brand landing page built around elegant product presentation, simple navigation, and a polished customer journey.',
-    stack: ['HTML5', 'CSS3', 'JavaScript'],
-    liveUrl: 'https://empirebakes.pxxl.click',
-    githubUrl: 'https://github.com/FortuneNnah/Empire-Bakes',
-    label: 'Brand',
-    image: empirebakesImg,
-    imageAlt: 'EmpireBakes landing page with featured baked goods',
-    highlight: { label: 'Role', text: 'Built the responsive landing page in plain HTML, CSS, and JavaScript.' },
-  },
-  {
-    name: 'Chapel of Praise',
-    summary: 'Community-focused website designed to share events, sermons, and key information in a warm, welcoming layout.',
-    stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://chapelofpraise.netlify.app',
-    githubUrl: 'https://github.com/FortuneNnah/ChapelofPraise',
-    label: 'Community',
-    image: chapelImg,
-    imageAlt: 'Chapel of Praise home page',
-    highlight: { label: 'Role', text: 'Built the site for events and sermons in React.' },
-  },
-  {
-    name: 'AIM',
-    summary: 'Minimal portfolio experience for showcasing work with a clean editorial layout and storytelling-first presentation.',
-    stack: ['React', 'Vite', 'CSS3'],
-    liveUrl: 'https://aim-portfolio.netlify.app',
-    githubUrl: 'https://github.com/FortuneNnah/AIM',
-    label: 'Portfolio',
-    image: aimImg,
-    imageAlt: 'AIM portfolio home page',
-    highlight: { label: 'Role', text: 'Designed and built the editorial portfolio layout.' },
-  },
+/* One color scheme per project panel (plain hex, from the poster palette).
+   bg      panel color            fg      text color on that panel
+   btn     main button fill       btnFg   text on that button
+   hover   accent: circle behind the window, button shadow, hovered letters
+   shadow  hard shadow under the browser window
+   Colors repeat if you add more than five projects. */
+const panels = [
+  { bg: '#1d3fd0', fg: '#f1ede3', btn: '#c6f135', btnFg: '#111111', hover: '#c6f135', shadow: '#111111' },
+  { bg: '#c6f135', fg: '#111111', btn: '#111111', btnFg: '#f1ede3', hover: '#1d3fd0', shadow: '#111111' },
+  { bg: '#111111', fg: '#f1ede3', btn: '#c6f135', btnFg: '#111111', hover: '#1d3fd0', shadow: '#c6f135' },
+  { bg: '#f1ede3', fg: '#111111', btn: '#1d3fd0', btnFg: '#f1ede3', hover: '#c6f135', shadow: '#111111' },
+  { bg: '#1d3fd0', fg: '#f1ede3', btn: '#c6f135', btnFg: '#111111', hover: '#c6f135', shadow: '#111111' },
 ];
+
 /* Projects showcase
-   Each project is a full-width panel. As you scroll, panels stack on top of
-   each other (position: sticky in index.css), and every screenshot sits in a
-   tilted browser window that straightens and lifts on hover. */
+   Each project is a full-width colored panel. As you scroll, panels stack on
+   top of each other (position: sticky in index.css). Every screenshot sits in
+   a tilted browser window that straightens and lifts on hover. */
 export default function ProjectGrid({ projects }) {
   return (
     <div className="showcase">
       {projects.map((project, index) => {
         const host = project.liveUrl.replace(/^https?:\/\//, '');
+        const panel = panels[index % panels.length];
 
         return (
           <article
             key={project.name}
             className="stage"
-            style={{ '--tint': tints[index % tints.length], '--lift': index }}
+            style={{
+              '--bg': panel.bg,
+              '--fg': panel.fg,
+              '--btn': panel.btn,
+              '--btn-fg': panel.btnFg,
+              '--hover': panel.hover,
+              '--win-shadow': panel.shadow,
+              '--lift': index,
+            }}
           >
             <div className="stage-copy">
               <span className="stage-tag">{project.label}</span>
