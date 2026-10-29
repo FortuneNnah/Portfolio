@@ -197,7 +197,6 @@
 .success-heading { font-size: 2.6rem; }
 .success-body { margin: 0; color: #4a4a45; }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .about-hero-grid, .contact-grid, .skills-grid, .education-grid { grid-template-columns: minmax(0, 1fr); }
   .overview-grid { grid-template-columns: minmax(0, 1fr); }

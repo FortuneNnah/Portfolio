@@ -1,11 +1,5 @@
 import BounceText from './BounceText';
 
-/* One color scheme per project panel (plain hex, from the poster palette).
-   bg      panel color            fg      text color on that panel
-   btn     main button fill       btnFg   text on that button
-   hover   accent: circle behind the window, button shadow, hovered letters
-   shadow  hard shadow under the browser window
-   Colors repeat if you add more than five projects. */
 const panels = [
   { bg: '#1d3fd0', fg: '#f1ede3', btn: '#c6f135', btnFg: '#111111', hover: '#c6f135', shadow: '#111111' },
   { bg: '#c6f135', fg: '#111111', btn: '#111111', btnFg: '#f1ede3', hover: '#1d3fd0', shadow: '#111111' },
@@ -14,10 +8,6 @@ const panels = [
   { bg: '#1d3fd0', fg: '#f1ede3', btn: '#c6f135', btnFg: '#111111', hover: '#c6f135', shadow: '#111111' },
 ];
 
-/* Projects showcase
-   Each project is a full-width colored panel. As you scroll, panels stack on
-   top of each other (position: sticky in index.css). Every screenshot sits in
-   a tilted browser window that straightens and lifts on hover. */
 export default function ProjectGrid({ projects }) {
   return (
     <div className="showcase">
