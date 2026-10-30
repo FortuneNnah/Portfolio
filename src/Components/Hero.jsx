@@ -86,7 +86,7 @@ export default function Hero({ socials }) {
                 alt="Portrait of Fortune Nnah in glasses and a black sweater"
                 width="851"
                 height="1280"
-                fetchpriority="high"
+                fetchPriority="high"
               />
             </figure>
 

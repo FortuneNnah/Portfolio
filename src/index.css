@@ -13,7 +13,7 @@
    About / Contact page styles live in pages.css.
    ===================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@500;700&family=Figtree:wght@400;500;600;700&display=swap");
-@import "./pages.css";
+/* @import "./pages.css"; */
 
 /* ---------- 1. Base ---------- */
 *,
